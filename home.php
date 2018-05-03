@@ -21,7 +21,11 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">E-Farmer</a>
+    
+    <a class="navbar-brand" href="index.html"><img src="img/logo.png" class="logo1"alt="Homepage">E-Farmer</a>
+    <style>img.logo1{
+	height: 50px;
+}</style>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -36,23 +40,23 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
           <a class="nav-link" href="charts.html">
             <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Charts</span>
+            <span class="nav-link-text">Weather</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           <a class="nav-link" href="tables.html">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Tables</span>
+            <span class="nav-link-text">Harvest</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Components</span>
+            <span class="nav-link-text">History</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="navbar.html">Navbar</a>
+              <a href="navbar.html">Commiunity</a>
             </li>
             <li>
               <a href="cards.html">Cards</a>
@@ -223,7 +227,50 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-<h1>Home</h1>
+<br>
+<style>
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 20%;
+   
+    background-image: url("img/tile1.jpg");
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+
+</style>
+
+<div class="card">
+
+ <!--  <img src="img/tile1.jpg" class = "tile" alt="Avatar" style="width:100%" href=> -->
+
+<input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
+<div class="centered">No Crops Added</div><style>
+	.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:white;
+    font-family: sans-serif;
+    font-size: 30px;
+    text-align: center;
+}
+
+
+</style>
+</div>
+
+
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

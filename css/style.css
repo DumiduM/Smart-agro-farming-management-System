@@ -39,9 +39,11 @@ color: black;
 	color: #515151;
 }
 
-img{
-	height: 80px;
-}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .site{
