@@ -71,15 +71,16 @@
 <?php
    include("config.php");
    session_start();
-   
+
+
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // username and password sent from form 
       
-      $myusername = mysqli_real_escape_string($db,$_POST['uname']);
-      $mypassword = mysqli_real_escape_string($db,$_POST['pass']); 
+      $myusername = mysqli_real_escape_string($conn,$_POST['uname']);
+      $mypassword = mysqli_real_escape_string($conn,$_POST['pass']); 
       
       $sql = "SELECT farmerID FROM farmer WHERE name = '$myusername' and password = '$mypassword'";
-      $result = mysqli_query($db,$sql);
+      $result = mysqli_query($conn,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $active = $row['active'];
       
