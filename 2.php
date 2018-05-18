@@ -219,18 +219,25 @@
       </ul>
     </div>
   </nav>
+
+
+
+  <!-- =========================================================================================== -->
+
+
+
   <div class="content-wrapper">
     <div class="container-fluid">
      <br><br>
       <div class="modal-body row">
 
         <div class="col-md-6">
-          <form class="form-horizontal" method="post" action="3.php">
+          <form class="form-horizontal" method="post">
 
             <div class="form-group">
               <label class="control-label col-sm-2" for="landsize">Land size : </label>
               <div class="col-sm-10">
-                <input type="number" name="landsize" class="form-control" placeholder="Type here your land size">
+                <input type="number" name="landsize" class="form-control" placeholder="Type here your land size" value="<?= isset($_POST['landsize']) ? htmlspecialchars($_POST['landsize']) : '' ?>" />
                 <select class="form-control" id="land_size">
                   <option>ha</option>
                   <option>m2</option>
@@ -240,7 +247,7 @@
             </div>
 
             <div class="form-group">
-              <label class="control-label col-sm-2" for="landsize">Location : </label>
+              <label class="control-label col-sm-2" for="location">Location : </label>
               <div class="col-sm-10">
                 <input type="text" id="pac-input" name="location" class="controls" placeholder="Enter your location">
               </div>
@@ -256,15 +263,11 @@
 
             <div class="form-group">
               <label class="control-label col-sm-4" for="button">Set-up if e-farmer kit is avaliable </label>
-              <button type="submit" name="kit_av" class="btn btn-success" value="1">Click here</button>
+              <button type="input" name="kit_av" class="btn btn-success" value="1">Click here</button>
             </div>
 
             <button type="submit" class="btn btn-success control-label col-sm-2" style="font-size: 20px;">Submit</button>
-          </form>
-        </div>
-
-
-            
+          
             <?php
             include("config.php");
             // Create connection
@@ -274,35 +277,60 @@
                 die("Connection failed: " . $conn->connect_error);
             } 
 
+            if (!empty($_POST['landsize']))
+              $landsize = mysqli_real_escape_string($conn,$_POST['landsize']);
+            else
+              $landsize = null;
 
-            $landsize = mysqli_real_escape_string($conn,$_POST['landsize']);
-            $location = mysqli_real_escape_string($conn,$_POST['location']);
-            $date = mysqli_real_escape_string($conn,$_POST['date']);
+            if (!empty($_POST['location']))
+              $location = mysqli_real_escape_string($conn,$_POST['location']);
+            else
+              $location = null;
 
-            $date_timestamp = strtotime($_POST['date']);
-            $day = date("d", $date_timestamp);
-            $month = date("m", $date_timestamp);
-            $year = date("Y", $date_timestamp);
+            // $date = mysqli_real_escape_string($conn,$_POST['date1']);
+            if (!empty($_POST['date'])){
+              $date_timestamp = strtotime($_POST['date']);
+                $day = date("d", $date_timestamp);
+                $month = date("m", $date_timestamp);
+                $year = date("Y", $date_timestamp);
+            }
+            else
+              $date = null;
+              
 
 
-            $sql = "SELECT district, yalaStart, yalaEnd, mahaStart, mahaEnd FROM districtkanna WHERE district LIKE '%$location%' AND year LIKE '$year'";
+            $sql = "SELECT district, yalaStart, yalaEnd, mahaStart, mahaEnd FROM districtkanna WHERE district LIKE '%$location%' AND year LIKE '2018'";
             $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
+           if ($result->num_rows > 0) {
                 // output data of each row
                 
 
 
 
-
+$row=".";
                 while($row = $result->fetch_assoc()) {
-                    echo "district: " . $row["district"]. " yalaStart: " . $row["yalaStart"]. " " . $row["yalaEnd"]. "<br>";
+                    echo "<br>". "district: " . $row["district"]. "<br>" . " yalaStart: " . $row["yalaStart"]. "<br>". " yalaEnd: " . $row["yalaEnd"]. "<br>".  " mahaStart: " . $row["mahaStart"]."<br>". " mahaEnd: " . $row["mahaEnd"]. "<br>";
                 }
             } else {
                 echo "0 results";
             }
+
+            if($month<$row["yalaStart"]){
+              echo "$date";
+            }
+            else
+              echo "$day"."$month"."$year";
+
             $conn->close();
             ?>
+
+          </form>
+        </div>
+
+
+            
+            
 
 
         <div class="col-md-6">
@@ -331,7 +359,7 @@
 
                   function initAutocomplete() {
                     var map = new google.maps.Map(document.getElementById('map'), {
-                      center: {lat: -33.8688, lng: 151.2195},
+                      center: {lat: 6.959203, lng: 80.783865},
                       zoom: 13,
                       mapTypeId: 'roadmap'
                     });
@@ -410,6 +438,12 @@
     <script src="js/sb-admin.min.js"></script>
   </div>
 </div>
+
+<!-- =============================================================================================
+ -->
+
+
+
 </body>
 
 </html>

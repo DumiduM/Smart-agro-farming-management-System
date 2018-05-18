@@ -222,6 +222,23 @@
   <div class="content-wrapper">
     <div class="container-fluid">
 <!-- Body starts here  ========================================================================================================================================================  -->
+       	<form method="POST">
+	       	<div class="form-group">
+	       		<label class="control-label col-sm-2" for="date">Date : </label>
+	              <div class="col-sm-10">
+	                <input type="date" name="date" id="pac-input"  class="controls" >
+	              </div>
+	        </div>
+	        <input type="submit">
+		</form>
+<?php
+$day = "sdsds";
+$date='date';
+echo "$date";
+
+
+
+?>
 
 
 
