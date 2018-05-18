@@ -1,3 +1,79 @@
+<?php
+	session_start();
+	include 'config.php';
+   if(isset($_POST['login'])){
+
+echo "<script type='text/javascript'>alert('check');</script>";
+   if($_SERVER["REQUEST_METHOD"] == "POST") {
+      // username and password sent from form 
+      $myusername = mysqli_real_escape_string($conn,$_POST['uname']);
+      $mypassword = mysqli_real_escape_string($conn,$_POST['pass']); 
+      
+      $sql = "SELECT farmerID FROM farmer WHERE name = '$myusername' and password = '$mypassword'";
+      $result = mysqli_query($conn,$sql);
+      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      $active = $row['active'];
+      
+      $count = mysqli_num_rows($result);
+      
+      // If result matched $myusername and $mypassword, table row must be 1 row
+		
+      if($count == 1) {
+         // session_register("$myusername");
+         $_SESSION['login_user'] = $myusername;
+         header("location: home.php");
+         exit();
+      }
+      else {
+         $error = "Your Login Name or Password is invalid";
+      		echo "<script type='text/javascript'>alert('$error');</script>";
+      }
+   }
+
+}
+
+
+  if(isset($_POST['register'])){
+  $farmerID=$_POST['farmerID'];
+  $farmerNIC=$_POST['farmerNIC'];
+  $farmerName=$_POST['farmerName'];
+  $farmerMobile=$_POST['farmerMobile'];
+  $farmerPs=$_POST['farmerPs'];
+  $farmerConPs=$_POST['farmerConPs'];
+  $farmerAgriDiv=$_POST['farmerAgriDiv'];
+
+
+  if ($farmerPs==$farmerConPs) {   
+   if(! $conn ) {
+      die('Could not connect: ' . mysql_error());
+      	echo "<script type='text/javascript'>alert('Could not connect');</script>";
+   }
+   
+   $sql = "INSERT INTO farmer (farmerID,NIC,name,mobile,password,agriDiv) VALUES ( '$farmerID','$farmerNIC','$farmerName','$farmerMobile','$farmerPs','$farmerAgriDiv')";
+
+   if ($conn->query($sql) === TRUE) {
+        	echo "<script type='text/javascript'>alert('SQL DONE');</script>";
+	   mysqli_close($conn);
+   header("Location:home.php");
+    exit;
+
+	}
+	else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "<script type='text/javascript'>alert('SQL FAIL');</script>";
+	}
+
+
+   }
+
+   else{
+      		echo "<script type='text/javascript'>alert('$Password doesn't match');</script>";
+	}
+}
+
+
+?>
+
 <link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="css/style.css" rel="stylesheet">
 <script src="js/bootstrap.min.js"></script>
@@ -29,7 +105,7 @@
 			<div class="background1">
 				<style>
 					body{
-					background-image:url('img/back.jpg');
+					background-image:url('img/bg.jpg');
 					background-repeat: no-repeat;
 	    			background-size: cover;
 	    			backface-visibility: (50%);
@@ -53,13 +129,13 @@
 				</div>	
 				<div class="col-sm-5">
 					 <div class="form-group">
-					    <input type="text" name="pass" class="form-control" placeholder="Password">
+					    <input type="text" name="pass" class="form-control" placeholder="Password" required>
 					    <div class="login-bottom-text hidden-sm"> Forgot your password?  </div>
 					  </div>
 				</div>
 				<div class="col-sm-2">
 					 <div class="form-group">
-					    <input type="submit" value="login" class="btn-header-login">
+					    <input type="submit" name ="login" value="login" class="btn-header-login" required>
 					  </div>
 				</div>
             </form>
@@ -68,41 +144,10 @@
 	</div>
 	</div>
 
-<?php
-   include("config.php");
-   session_start();
-
-
-   if($_SERVER["REQUEST_METHOD"] == "POST") {
-      // username and password sent from form 
-      
-      $myusername = mysqli_real_escape_string($conn,$_POST['uname']);
-      $mypassword = mysqli_real_escape_string($conn,$_POST['pass']); 
-      
-      $sql = "SELECT farmerID FROM farmer WHERE name = '$myusername' and password = '$mypassword'";
-      $result = mysqli_query($conn,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      $active = $row['active'];
-      
-      $count = mysqli_num_rows($result);
-      
-      // If result matched $myusername and $mypassword, table row must be 1 row
-		
-      if($count == 1) {
-         // session_register("$myusername");
-         $_SESSION['login_user'] = $myusername;
-         
-         header("location: home.php");
-      }else {
-         $error = "Your Login Name or Password is invalid";
-      		echo "<script type='text/javascript'>alert('$error');</script>";
-      }
-   }
-?>
 
 </header>
 
-    <section id="home" class="s-home target-section" background="img/back.jpg" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+    <section id="home" class="s-home target-section" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
 
         <div class="overlay"></div>
         <div class="shadow-overlay"></div>
@@ -122,36 +167,36 @@
 			  	<form method="POST">
                     <div class="form-group">
                       <label class="control-label" for=""></label>
-                      <input type="text" name="farmerID" class="form-control" placeholder="NIC">
+                      <input type="text" name="farmerID" required class="form-control" placeholder="NIC">
                     </div>
 					<div class="form-group">
 					  <label class="control-label" for=""></label>
-					  <input type="text" name="farmerNIC" class="form-control" placeholder="NIC">
+					  <input type="text" name="farmerNIC"  required class="form-control" placeholder="NIC">
 					</div>
 
 					<div class="form-group">
 					  <label class="control-label" for=""></label>
-					  <input type="text" name="farmerName" class="form-control" placeholder="Name">
+					  <input type="text" name="farmerName" required class="form-control" placeholder="Name">
 					</div>
 
 					<div class="form-group">
 					  <label class="control-label" for=""></label>
-					  <input type="text" name="farmerAgriDiv" class="form-control" placeholder="Agriculture Division">
+					  <input type="text" name="farmerAgriDiv" required class="form-control" placeholder="Agriculture Division">
 					</div>
 
 					<div class="form-group">
 					  <label class="control-label" for=""></label>
-					  <input type="text" name="farmerMobile" class="form-control" placeholder="Mobile">
+					  <input type="text" name="farmerMobile" required class="form-control" placeholder="Mobile">
 					</div>
 
 					<div class="form-group">
 					  <label class="control-label" for=""></label>
-					  <input type="password" name="farmerPs" class="form-control" placeholder="Password">
+					  <input type="password" name="farmerPs" required class="form-control" placeholder="Password">
 					</div>
 
 					<div class="form-group">
 					  <label class="control-label" for=""></label>
-					  <input type="password" name="farmerConPs" class="form-control" placeholder="Repeat Password">
+					  <input type="password" name="farmerConPs" required class="form-control" placeholder="Repeat Password">
 					</div>
 				
 					<small>
@@ -164,44 +209,6 @@
 				</div>	 
 				</form>
  <?php
-
-  if(isset($_POST['register']))
-{
-  $farmerID=$_POST['farmerID'];
-  $farmerNIC=$_POST['farmerNIC'];
-  $farmerName=$_POST['farmerName'];
-  $farmerMobile=$_POST['farmerMobile'];
-  $farmerPs=$_POST['farmerPs'];
-  $farmerConPs=$_POST['farmerConPs'];
-  $farmerAgriDiv=$_POST['farmerAgriDiv'];
-
-
-
-  if ($farmerPs==$farmerConPs) {
-
-
-
-   include("config.php");
-   
-   if(! $conn ) {
-      die('Could not connect: ' . mysql_error());
-   }
-   
-   $sql = 'INSERT INTO farmer '.
-      '(farmerID,NIC,name,mobile,password,agriDiv) '.
-      'VALUES ( "guest",$farmerNIC,$farmerName,$farmerMobile,$farmerPs,$farmerAgriDiv)';
-      
-   mysql_select_db('e-farmer');
-   $retval = mysql_query( $sql, $conn );
-   
-   if(! $retval ) {
-      die('Could not enter data: ' . mysql_error());
-   }
-   
-   echo "Entered data successfully\n";
-   
-   mysql_close($conn);}
-}
 
    ?>
 

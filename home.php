@@ -1,3 +1,18 @@
+
+<?php
+  session_start();
+  if(!isset($_SESSION['login_user'])){
+    header("location:index.php");
+    echo "<script type='text/javascript'>alert('error2');</script>";
+  }
+  else{
+    $name = $_SESSION['login_user'];
+    // echo "<script type='text/javascript'>alert('$name');</script>";
+  }
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,13 +31,15 @@
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    
-    <a class="navbar-brand" href="index.html"><img src="img/logo.png" class="logo1"alt="Homepage">E-Farmer</a>
+    <img src="img/logo.png"  class="logo1"alt="Homepage">
+    <a class="navbar-brand" id="navbar-brand" href="index.html">E-Farmer</a>
     <style>img.logo1{
 	height: 50px;
 }</style>
@@ -264,10 +281,10 @@
     font-size: 30px;
     text-align: center;
 }
-
-
 </style>
 </div>
+
+
 
 
 
@@ -285,6 +302,16 @@
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/sb-admin-charts.min.js"></script>
+
+    <script>
+  window.onload = function setUser(){
+  document.getElementById("navbar-brand").innerHTML ="Welcome " + 
+  "<?php echo($name)?>";
+
+
+
+}
+</script>
   </div>
 </div>
 </body>
