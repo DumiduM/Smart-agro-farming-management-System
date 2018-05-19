@@ -1,3 +1,8 @@
+
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -237,12 +242,14 @@
             <div class="form-group">
               <label class="control-label col-sm-2" for="landsize">Land size : </label>
               <div class="col-sm-10">
+                <row>
                 <input type="number" name="landsize" class="form-control" placeholder="Type here your land size" value="<?= isset($_POST['landsize']) ? htmlspecialchars($_POST['landsize']) : '' ?>" />
                 <select class="form-control" id="land_size">
                   <option>ha</option>
                   <option>m2</option>
                   <option>perchaces</option>
                 </select>
+              </row>
               </div>
             </div>
 
@@ -287,9 +294,14 @@
             else
               $location = null;
 
-            // $date = mysqli_real_escape_string($conn,$_POST['date1']);
             if (!empty($_POST['date'])){
-              $date_timestamp = strtotime($_POST['date']);
+              $date = $_POST['date'];
+            }
+
+
+            // $date = mysqli_real_escape_string($conn,$_POST['date1']);
+            if (!empty($date)){
+              $date_timestamp = strtotime($date);
                 $day = date("d", $date_timestamp);
                 $month = date("m", $date_timestamp);
                 $year = date("Y", $date_timestamp);
@@ -298,30 +310,59 @@
               $date = null;
               
 
-
-            $sql = "SELECT district, yalaStart, yalaEnd, mahaStart, mahaEnd FROM districtkanna WHERE district LIKE '%$location%' AND year LIKE '2018'";
+            // echo "<br>". "$date"."<br>". "$day"."<br>". "$month"."<br>". "$year";
+         
+            $sql = "SELECT district, yalaStart, yalaEnd, mahaStart, mahaEnd FROM districtkanna WHERE district LIKE '%$location%' AND year LIKE '$year'";
             $result = $conn->query($sql);
 
            if ($result->num_rows > 0) {
                 // output data of each row
-                
-
-
-
-$row=".";
+            $row=".";
                 while($row = $result->fetch_assoc()) {
                     echo "<br>". "district: " . $row["district"]. "<br>" . " yalaStart: " . $row["yalaStart"]. "<br>". " yalaEnd: " . $row["yalaEnd"]. "<br>".  " mahaStart: " . $row["mahaStart"]."<br>". " mahaEnd: " . $row["mahaEnd"]. "<br>";
+                    $yalaStart = $row["yalaStart"];
+                    $yalaEnd = $row["yalaEnd"];
+                    $mahaStart = $row["mahaStart"];
+                    $mahaEnd = $row["mahaEnd"];
+            
                 }
             } else {
                 echo "0 results";
             }
 
-            if($month<$row["yalaStart"]){
-              echo "$date";
-            }
-            else
-              echo "$day"."$month"."$year";
+            $check = "0";
+            $kannaType = "";
+            while($month<="12"){
+              if($month==$yalaEnd || $month==$mahaEnd){
+                if($month==$yalaEnd){
+                  $kannaType = "YALA";
+                  $check = "1";
+                }
+                else{
+                  $kannaType = "MAHA";
+                  $check = "1";
+                }
+              }
+              
+              if ($check =="1")
+                  break;
+              $month++;
 
+              if ($month == "13")
+                $month = "1";
+            }
+
+          $sql = "SELECT cropID,priority FROM division WHERE type LIKE '$kannaType' AND district LIKE '%$location%' ORDER BY  priority ASC";
+          $result = $conn->query($sql);
+        
+
+        if ($result->num_rows > 0) {
+                // output data of each row
+            $row=".";
+                while($row = $result->fetch_assoc()) {
+                  echo "<br>". "crop: " . $row["cropID"]. "priority: " . $row["priority"];
+                }
+              }
             $conn->close();
             ?>
 
