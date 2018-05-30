@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -217,13 +221,49 @@
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>
+
     </div>
   </nav>
   <div class="content-wrapper">
-    <div class="container-fluid">
-<!-- Body starts here  ========================================================================================================================================================  -->
+    <div class="container-fluid" id = "Body-container">
+<!-- Body starts here  ========================================================================================================================================================  -->                  
+  <?php 
+  $j="0";
+  while($j < $_SESSION["i"]){
+      $j++;
+      $crop = $_SESSION["crop"."$j"];
+    //  echo $priority =$_SESSION["priority"."$j"];
 
+      $path = "img/banner/beans.jpg";
 
+      if ($crop == "001"){
+        $path = "img/banner/potato.jpg";
+      }
+      else if ($crop == "002"){
+        $path = "img/banner/carrot.jpg";
+      }
+      else if ($crop == "003"){
+        $path = "img/banner/beet.jpg";
+      }
+      else if ($crop == "004"){
+        $path = "img/banner/beans.jpg";
+      }
+      ?> <script>addBanner("<?php echo "$path"; ?>");
+              function addBanner(<?php $path ?>) {
+              var x = document.createElement("IMG");
+              x.setAttribute("src","<?php echo "$path"; ?>");
+              x.setAttribute("width", "1000");
+              // x.setAttribute("height", "228");
+              x.setAttribute("alt", "The Pulpit Rock");
+              document.getElementById("Body-container").appendChild(x);
+
+              }
+          </script>
+      <?php
+      echo "<br><br>";
+      }
+
+      ?> 
 
 <!-- Body ends here  ==========================================================================================================================================================  -->
     <!-- Bootstrap core JavaScript-->

@@ -1,4 +1,3 @@
-
 <?php
   session_start();
 ?>
@@ -227,7 +226,14 @@
 
 
 
-  <!-- =========================================================================================== -->
+
+
+
+  <!-- ==================================================================================================================================================================================== -->
+
+
+
+
 
 
 
@@ -237,134 +243,158 @@
       <div class="modal-body row">
 
         <div class="col-md-6">
-          <form class="form-horizontal" method="post">
+          <form class="form-horizontal" method="post" action="3.PHP">
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="landsize">Land size : </label>
+                              <div class="col-sm-10">
+                                <row>
+                                <input type="number" name="landsize" class="form-control" placeholder="Type here your land size" value="<?= isset($_POST['landsize']) ? htmlspecialchars($_POST['landsize']) : '' ?>" />
+                                <select class="form-control" id="land_size">
+                                  <option>ha</option>
+                                  <option>m2</option>
+                                  <option>perchaces</option>
+                                </select>
+                              </row>
+                              </div>
+                            </div>
 
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="landsize">Land size : </label>
-              <div class="col-sm-10">
-                <row>
-                <input type="number" name="landsize" class="form-control" placeholder="Type here your land size" value="<?= isset($_POST['landsize']) ? htmlspecialchars($_POST['landsize']) : '' ?>" />
-                <select class="form-control" id="land_size">
-                  <option>ha</option>
-                  <option>m2</option>
-                  <option>perchaces</option>
-                </select>
-              </row>
-              </div>
-            </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="location">Location : </label>
+                              <div class="col-sm-10">
+                                <input type="text" id="pac-input" name="location" class="controls" placeholder="Enter your location">
+                              </div>
+                            </div>
 
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="location">Location : </label>
-              <div class="col-sm-10">
-                <input type="text" id="pac-input" name="location" class="controls" placeholder="Enter your location">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="date">Date : </label>
-              <div class="col-sm-10">
-                <input type="date" name="date" id="pac-input"  class="controls" >
-              </div>
-            </div>
-
-
-            <div class="form-group">
-              <label class="control-label col-sm-4" for="button">Set-up if e-farmer kit is avaliable </label>
-              <button type="input" name="kit_av" class="btn btn-success" value="1">Click here</button>
-            </div>
-
-            <button type="submit" class="btn btn-success control-label col-sm-2" style="font-size: 20px;">Submit</button>
-          
-            <?php
-            include("config.php");
-            // Create connection
-           
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            } 
-
-            if (!empty($_POST['landsize']))
-              $landsize = mysqli_real_escape_string($conn,$_POST['landsize']);
-            else
-              $landsize = null;
-
-            if (!empty($_POST['location']))
-              $location = mysqli_real_escape_string($conn,$_POST['location']);
-            else
-              $location = null;
-
-            if (!empty($_POST['date'])){
-              $date = $_POST['date'];
-            }
+                            <div class="form-group">
+                              <label class="control-label col-sm-2" for="date">Date : </label>
+                              <div class="col-sm-10">
+                                <input type="date" name="date" id="pac-input"  class="controls" >
+                              </div>
+                            </div>
 
 
-            // $date = mysqli_real_escape_string($conn,$_POST['date1']);
-            if (!empty($date)){
-              $date_timestamp = strtotime($date);
-                $day = date("d", $date_timestamp);
-                $month = date("m", $date_timestamp);
-                $year = date("Y", $date_timestamp);
-            }
-            else
-              $date = null;
-              
+                            <div class="form-group">
+                              <label class="control-label col-sm-4" for="button">Set-up if e-farmer kit is avaliable </label>
+                              <button type="input" name="kit_av" class="btn btn-success" value="1">Click here</button>
+                            </div>
 
-            // echo "<br>". "$date"."<br>". "$day"."<br>". "$month"."<br>". "$year";
-         
-            $sql = "SELECT district, yalaStart, yalaEnd, mahaStart, mahaEnd FROM districtkanna WHERE district LIKE '%$location%' AND year LIKE '$year'";
-            $result = $conn->query($sql);
+                            <button type="submit" name="submit" class="btn btn-success control-label col-sm-2" style="font-size: 20px;">Submit</button>
+                          
+                            <?php
 
-           if ($result->num_rows > 0) {
-                // output data of each row
-            $row=".";
-                while($row = $result->fetch_assoc()) {
-                    echo "<br>". "district: " . $row["district"]. "<br>" . " yalaStart: " . $row["yalaStart"]. "<br>". " yalaEnd: " . $row["yalaEnd"]. "<br>".  " mahaStart: " . $row["mahaStart"]."<br>". " mahaEnd: " . $row["mahaEnd"]. "<br>";
-                    $yalaStart = $row["yalaStart"];
-                    $yalaEnd = $row["yalaEnd"];
-                    $mahaStart = $row["mahaStart"];
-                    $mahaEnd = $row["mahaEnd"];
-            
-                }
-            } else {
-                echo "0 results";
-            }
+                            
+                            include("config.php");
+                            // Create connection
+                            $i="0";
+                            $date = null;
+                            $year = null;
+                            $month = null;
+                            $yalaEnd = null;
+                            $mahaEnd = null;
+                        
+                            if(isset($_POST['submit'])){
+                            // Check connection
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            } 
 
-            $check = "0";
-            $kannaType = "";
-            while($month<="12"){
-              if($month==$yalaEnd || $month==$mahaEnd){
-                if($month==$yalaEnd){
-                  $kannaType = "YALA";
-                  $check = "1";
-                }
-                else{
-                  $kannaType = "MAHA";
-                  $check = "1";
-                }
-              }
-              
-              if ($check =="1")
-                  break;
-              $month++;
+                            if (!empty($_POST['landsize']))
+                              $landsize = mysqli_real_escape_string($conn,$_POST['landsize']);
+                            else
+                              $landsize = null;
 
-              if ($month == "13")
-                $month = "1";
-            }
+                            if (!empty($_POST['location']))
+                              $location = mysqli_real_escape_string($conn,$_POST['location']);
+                            else
+                              $location = null;
+                            
+                            if (!empty($_POST['date'])){
+                              $date = $_POST['date'];
+                            }
 
-          $sql = "SELECT cropID,priority FROM division WHERE type LIKE '$kannaType' AND district LIKE '%$location%' ORDER BY  priority ASC";
-          $result = $conn->query($sql);
-        
 
-        if ($result->num_rows > 0) {
-                // output data of each row
-            $row=".";
-                while($row = $result->fetch_assoc()) {
-                  echo "<br>". "crop: " . $row["cropID"]. "priority: " . $row["priority"];
-                }
-              }
-            $conn->close();
-            ?>
+                            // $date = mysqli_real_escape_string($conn,$_POST['date1']);
+                            if (!empty($date)){
+                              $date_timestamp = strtotime($date);
+                                $day = date("d", $date_timestamp);
+                                $month = date("m", $date_timestamp);
+                                $year = date("Y", $date_timestamp);
+                            }
+                            else
+                              $date = null;
+                              
+
+                            // echo "<br>". "$date"."<br>". "$day"."<br>". "$month"."<br>". "$year";
+                         
+                            $sql = "SELECT district, yalaStart, yalaEnd, mahaStart, mahaEnd FROM districtkanna WHERE district LIKE '%$location%' AND year LIKE '$year'";
+                            $result = $conn->query($sql);
+
+                           if ($result->num_rows > 0) {
+                                // output data of each row
+                            $row=".";
+                                while($row = $result->fetch_assoc()) {
+                                    echo "<br>". "district: " . $row["district"]. "<br>" . " yalaStart: " . $row["yalaStart"]. "<br>". " yalaEnd: " . $row["yalaEnd"]. "<br>".  " mahaStart: " . $row["mahaStart"]."<br>". " mahaEnd: " . $row["mahaEnd"]. "<br>";
+                                    $yalaStart = $row["yalaStart"];
+                                    $yalaEnd = $row["yalaEnd"];
+                                    $mahaStart = $row["mahaStart"];
+                                    $mahaEnd = $row["mahaEnd"];
+                                }
+                            } else {
+                                echo "0 results";
+                            }
+
+                            $check = "0";
+                            $kannaType = "";
+                            while($month<="12"){
+                              if($month==$yalaEnd || $month==$mahaEnd){
+                                if($month==$yalaEnd){
+                                  $kannaType = "YALA";
+                                  $check = "1";
+                                }
+                                else{
+                                  $kannaType = "MAHA";
+                                  $check = "1";
+                                }
+                              }
+                              
+                              if ($check =="1")
+                                  break;
+                              $month++;
+
+                              if ($month == "13")
+                                $month = "1";
+                            }
+
+                          $sql = "SELECT cropID,priority FROM division WHERE type LIKE '$kannaType' AND district LIKE '%$location%' ORDER BY  priority ASC";
+                          $result = $conn->query($sql);
+                        
+                        
+                        if ($result->num_rows > 0) {
+                                // output data of each row
+                            $row=".";
+                            
+                                while($row = $result->fetch_assoc()) {
+                                  $i++;
+                                  echo "<br>". "crop: " . $row["cropID"]. "priority: " . $row["priority"];
+                                  $_SESSION["crop"."$i"] = $row["cropID"];
+                                  $_SESSION["priority"."$i"] = $row["priority"];
+                                }
+                              }
+                            $conn->close();
+                  //echo "$kannaType";
+                  echo $_SESSION["kannaType"] = "$kannaType";
+                  echo $_SESSION["i"]="$i";
+                  }
+                  //echo $_SESSION["kannaType"];
+
+                    $j="0";
+                    while ($j<$i){
+                      $j++;
+                      echo $_SESSION["crop"."$j"]." " ;
+                      echo $_SESSION["priority"."$j"]."<br>";
+                      
+                    }
+                  ?>
 
           </form>
         </div>
@@ -480,8 +510,19 @@
   </div>
 </div>
 
-<!-- =============================================================================================
- -->
+
+
+
+
+
+
+<!-- ====================================================================================================================================================================================-->
+
+
+
+
+
+
 
 
 
