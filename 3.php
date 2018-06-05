@@ -16,6 +16,8 @@
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
@@ -226,45 +228,106 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid" id = "Body-container">
-<!-- Body starts here  ========================================================================================================================================================  -->                  
-  <?php 
-  $j="0";
-  while($j < $_SESSION["i"]){
-      $j++;
-      $crop = $_SESSION["crop"."$j"];
-    //  echo $priority =$_SESSION["priority"."$j"];
+<!-- Body starts here  ========================================================================================================================================================  -->           
+    <div class="row">   
+              <div class="col-sm-8" id="row-banner" style="background-color:lavenderblush;">
+                 <?php 
+                    $j="0";
+                    // echo $_SESSION['i'];
+                    // echo $_SESSION['kannaType'];
+                    // echo $_SESSION['login_user'];
 
-      $path = "img/banner/beans.jpg";
+                    while($j < $_SESSION['i']){
+                        $j++;
+                        $crop = $_SESSION["crop"."$j"];
+                      //  echo $priority =$_SESSION["priority"."$j"];
 
-      if ($crop == "001"){
-        $path = "img/banner/potato.jpg";
-      }
-      else if ($crop == "002"){
-        $path = "img/banner/carrot.jpg";
-      }
-      else if ($crop == "003"){
-        $path = "img/banner/beet.jpg";
-      }
-      else if ($crop == "004"){
-        $path = "img/banner/beans.jpg";
-      }
-      ?> <script>addBanner("<?php echo "$path"; ?>");
-              function addBanner(<?php $path ?>) {
-              var x = document.createElement("IMG");
-              x.setAttribute("src","<?php echo "$path"; ?>");
-              x.setAttribute("width", "1000");
-              // x.setAttribute("height", "228");
-              x.setAttribute("alt", "The Pulpit Rock");
-              document.getElementById("Body-container").appendChild(x);
+                        $path = "img/banner/beans.jpg";
 
-              }
-          </script>
-      <?php
-      echo "<br><br>";
-      }
+                        if ($crop == "001"){
+                          $path = "img/banner/potato.jpg";
+                        }
+                        else if ($crop == "002"){
+                          $path = "img/banner/carrot.jpg";
+                        }
+                        else if ($crop == "003"){
+                          $path = "img/banner/beet.jpg";
+                        }
+                        else if ($crop == "004"){
+                          $path = "img/banner/beans.jpg";
+                        }
+                 ?>
+                    <script>
+                      addBanner("<?php echo "$path"; ?>");
+            
+                      function addBanner(<?php $path ?>) {
+                        var x = document.createElement("IMG");
+                        x.setAttribute("src","<?php echo "$path"; ?>");
+                        x.setAttribute("width","100%");
+                        // x.setAttribute("height", "228");
+                        // x.setAttribute("alt", "The Pulpit Rock");
+                        document.getElementById("row-banner").appendChild(x);
+                             
+                      }
+                    </script>
+                   <?php echo "<br><br>"; } ?>
+                   <form>
+                    <input type="submit" name="btn2" id="btnCk" value="cdvfdfdfd">
+                    <input type="submit" name="btn3" id="btnCk" value="dfdfd">
+                    </form>
 
-      ?> 
+              </div>
+              <div class="col-sm-4" id="variety-col" style="background-color:lavender;">
+            
+                <?php
+                if($_GET){
+                  if(isset($_GET['btn2'])){
+                  include("config.php");
+                  $sql = "SELECT varietyName,harvestRate,varietyPic FROM variety WHERE cropID LIKE '001'";
+                                $result = $conn->query($sql);
+                                if ($result->num_rows > 0) {
+                                      // output data of each row
+                                  $row=".";
+                                      while($row = $result->fetch_assoc()) {
+                                          echo "<br>". "Name: " . $row["varietyName"]. "<br>" . " harvestRate: "."<br>";
+                                          $variety_Path = $row["varietyPic"];
+                      
+                      ?>                    
+                                          <script>
+                      addBanner("<?php echo "$variety_Path"; ?>");
+            
+                      function addBanner(<?php $variety_Path ?>) {
+                        var x = document.createElement("IMG");
+                        x.setAttribute("src","<?php echo "$variety_Path"; ?>");
+                        x.setAttribute("width","40%");
+                        // x.setAttribute("height", "228");
+                        // x.setAttribute("alt", "The Pulpit Rock");
+                        document.getElementById("variety-col").appendChild(x);
+                             
+                      }
+                    </script>
 
+                    <?php
+                                      }
+                                  } else {
+                                      echo "No varietys found!";
+                                  }
+                                }
+                                }
+                ?>
+
+            </div>
+    </div>
+
+
+  <style>
+    .row1{
+      width: 70%;
+    }
+    .row2{
+      margin-left: 70%;
+    }
+  </style>
 <!-- Body ends here  ==========================================================================================================================================================  -->
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

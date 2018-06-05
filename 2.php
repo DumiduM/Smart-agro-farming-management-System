@@ -1,5 +1,14 @@
 <?php
   session_start();
+  if(!isset($_SESSION['login_user'])){
+    header("location:index.php");
+    echo "<script type='text/javascript'>alert('error2');</script>";
+  }
+  else{
+    $name = $_SESSION['login_user'];
+    // echo "<script type='text/javascript'>alert('$name');</script>";
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +32,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand" id ="navbar-brand" "href="index.html">Start</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -243,7 +252,7 @@
       <div class="modal-body row">
 
         <div class="col-md-6">
-          <form class="form-horizontal" method="post" action="3.PHP">
+          <form class="form-horizontal" method="post" action="">
                             <div class="form-group">
                               <label class="control-label col-sm-2" for="landsize">Land size : </label>
                               <div class="col-sm-10">
@@ -272,7 +281,7 @@
                               </div>
                             </div>
 
-
+                          
                             <div class="form-group">
                               <label class="control-label col-sm-4" for="button">Set-up if e-farmer kit is avaliable </label>
                               <button type="input" name="kit_av" class="btn btn-success" value="1">Click here</button>
@@ -294,100 +303,101 @@
                         
                             if(isset($_POST['submit'])){
                             // Check connection
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
-                            } 
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                } 
 
-                            if (!empty($_POST['landsize']))
-                              $landsize = mysqli_real_escape_string($conn,$_POST['landsize']);
-                            else
-                              $landsize = null;
+                                if (!empty($_POST['landsize']))
+                                  $landsize = mysqli_real_escape_string($conn,$_POST['landsize']);
+                                else
+                                  $landsize = null;
 
-                            if (!empty($_POST['location']))
-                              $location = mysqli_real_escape_string($conn,$_POST['location']);
-                            else
-                              $location = null;
-                            
-                            if (!empty($_POST['date'])){
-                              $date = $_POST['date'];
-                            }
-
-
-                            // $date = mysqli_real_escape_string($conn,$_POST['date1']);
-                            if (!empty($date)){
-                              $date_timestamp = strtotime($date);
-                                $day = date("d", $date_timestamp);
-                                $month = date("m", $date_timestamp);
-                                $year = date("Y", $date_timestamp);
-                            }
-                            else
-                              $date = null;
-                              
-
-                            // echo "<br>". "$date"."<br>". "$day"."<br>". "$month"."<br>". "$year";
-                         
-                            $sql = "SELECT district, yalaStart, yalaEnd, mahaStart, mahaEnd FROM districtkanna WHERE district LIKE '%$location%' AND year LIKE '$year'";
-                            $result = $conn->query($sql);
-
-                           if ($result->num_rows > 0) {
-                                // output data of each row
-                            $row=".";
-                                while($row = $result->fetch_assoc()) {
-                                    echo "<br>". "district: " . $row["district"]. "<br>" . " yalaStart: " . $row["yalaStart"]. "<br>". " yalaEnd: " . $row["yalaEnd"]. "<br>".  " mahaStart: " . $row["mahaStart"]."<br>". " mahaEnd: " . $row["mahaEnd"]. "<br>";
-                                    $yalaStart = $row["yalaStart"];
-                                    $yalaEnd = $row["yalaEnd"];
-                                    $mahaStart = $row["mahaStart"];
-                                    $mahaEnd = $row["mahaEnd"];
+                                if (!empty($_POST['location']))
+                                  $location = mysqli_real_escape_string($conn,$_POST['location']);
+                                else
+                                  $location = null;
+                                
+                                if (!empty($_POST['date'])){
+                                  $date = $_POST['date'];
                                 }
-                            } else {
-                                echo "0 results";
-                            }
 
-                            $check = "0";
-                            $kannaType = "";
-                            while($month<="12"){
-                              if($month==$yalaEnd || $month==$mahaEnd){
-                                if($month==$yalaEnd){
-                                  $kannaType = "YALA";
-                                  $check = "1";
+                                if (!empty($date)){
+                                  $date_timestamp = strtotime($date);
+                                    $day = date("d", $date_timestamp);
+                                    $month = date("m", $date_timestamp);
+                                    $year = date("Y", $date_timestamp);
                                 }
-                                else{
-                                  $kannaType = "MAHA";
-                                  $check = "1";
-                                }
-                              }
-                              
-                              if ($check =="1")
-                                  break;
-                              $month++;
+                                else
+                                  $date = null;
+                                                           
+                                $sql = "SELECT district, yalaStart, yalaEnd, mahaStart, mahaEnd FROM districtkanna WHERE district LIKE '%$location%' AND year LIKE '$year'";
+                                $result = $conn->query($sql);
 
-                              if ($month == "13")
-                                $month = "1";
-                            }
+                                 if ($result->num_rows > 0) {
+                                      // output data of each row
+                                  $row=".";
+                                      while($row = $result->fetch_assoc()) {
+                                          echo "<br>". "district: " . $row["district"]. "<br>" . " yalaStart: " . $row["yalaStart"]. "<br>". " yalaEnd: " . $row["yalaEnd"]. "<br>".  " mahaStart: " . $row["mahaStart"]."<br>". " mahaEnd: " . $row["mahaEnd"]. "<br>";
+                                          $yalaStart = $row["yalaStart"];
+                                          $yalaEnd = $row["yalaEnd"];
+                                          $mahaStart = $row["mahaStart"];
+                                          $mahaEnd = $row["mahaEnd"];
+                                      }
+                                  } else {
+                                      echo "0 results";
+                                  }
 
-                          $sql = "SELECT cropID,priority FROM division WHERE type LIKE '$kannaType' AND district LIKE '%$location%' ORDER BY  priority ASC";
-                          $result = $conn->query($sql);
+                                  $check = "0";
+                                  $kannaType = "";
+
+                                  while($month<="12"){
+                                    if($month==$yalaEnd || $month==$mahaEnd){
+                                      if($month==$yalaEnd){
+                                        $kannaType = "YALA";
+                                        $check = "1";
+                                      }
+                                      else{
+                                        $kannaType = "MAHA";
+                                        $check = "1";
+                                      }
+                                    }
+                                    
+                                    if ($check =="1")
+                                        break;
+                                    $month++;
+
+                                    if ($month == "13")
+                                      $month = "1";
+                                  }
+
+                                  $sql = "SELECT cropID,priority FROM division WHERE type LIKE '$kannaType' AND district LIKE '%$location%' ORDER BY  priority ASC";
+                                  $result = $conn->query($sql);
+                                
                         
-                        
-                        if ($result->num_rows > 0) {
-                                // output data of each row
-                            $row=".";
-                            
-                                while($row = $result->fetch_assoc()) {
-                                  $i++;
-                                  echo "<br>". "crop: " . $row["cropID"]. "priority: " . $row["priority"];
-                                  $_SESSION["crop"."$i"] = $row["cropID"];
-                                  $_SESSION["priority"."$i"] = $row["priority"];
-                                }
-                              }
-                            $conn->close();
+                                  if ($result->num_rows > 0) {
+                                          // output data of each row
+                                      $row=".";
+                                      
+                                          while($row = $result->fetch_assoc()) {
+                                            $i++;
+                                            echo "<br>". "crop: " . $row["cropID"]. "priority: " . $row["priority"];
+                                            $_SESSION["crop"."$i"] = $row["cropID"];
+                                            $_SESSION["priority"."$i"] = $row["priority"];
+                                            echo $kannaType;
+                                          }
+                                        }
+                                      $conn->close();
                   //echo "$kannaType";
-                  echo $_SESSION["kannaType"] = "$kannaType";
-                  echo $_SESSION["i"]="$i";
+                  $_SESSION['kannaType'] = $kannaType;
+                  $_SESSION['i']=$i;
                   }
+
                   //echo $_SESSION["kannaType"];
 
                     $j="0";
+                    echo '<br>';
+
+                     echo '<br>';
                     while ($j<$i){
                       $j++;
                       echo $_SESSION["crop"."$j"]." " ;
@@ -398,11 +408,6 @@
 
           </form>
         </div>
-
-
-            
-            
-
 
         <div class="col-md-6">
         <!-- Your second column here -->
@@ -507,6 +512,12 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
+    <script>
+      window.onload = function setUser(){
+  document.getElementById("navbar-brand").innerHTML ="Welcome " + 
+  "<?php echo($name)?>";
+}
+    </script>
   </div>
 </div>
 

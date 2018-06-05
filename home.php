@@ -9,6 +9,7 @@
     $name = $_SESSION['login_user'];
     // echo "<script type='text/javascript'>alert('$name');</script>";
   }
+
 ?>
 
 
@@ -307,9 +308,6 @@
   window.onload = function setUser(){
   document.getElementById("navbar-brand").innerHTML ="Welcome " + 
   "<?php echo($name)?>";
-
-
-
 }
 </script>
   </div>
