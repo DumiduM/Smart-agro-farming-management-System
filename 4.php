@@ -1,25 +1,6 @@
-
 <?php
   session_start();
-  if(!isset($_SESSION['login_user'])){
-    header("location:index.php");
-    echo "<script type='text/javascript'>alert('error2');</script>";
-  }
-  else{
-    $name = $_SESSION['login_user'];
-    // echo "<script type='text/javascript'>alert('$name');</script>";
-  }
-
-  $Schedule_check="0";
-  
-
-
-  // $sql = "SELECT c.name,fc.dateSc,s.info,s.stepID FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE f.farmerID LIKE '$_SESSION['login_user']' AND c.cropID=v.cropID AND v.varietyID=s.varietyID AND f.farmerID=fc.farmerID";
-
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>e-Farmer</title>
+  <title>SB Admin - Start Bootstrap Template</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -39,18 +20,13 @@
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-
+  <link href="liststyle.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <img src="img/logo.png"  class="logo1"alt="Homepage">
-    <a class="navbar-brand" id="navbar-brand" href="index.html">E-Farmer</a>
-    <style>img.logo1{
-	height: 50px;
-}</style>
+    <a class="navbar-brand" href="index.html">Welcome test</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -65,23 +41,23 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
           <a class="nav-link" href="charts.html">
             <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Weather</span>
+            <span class="nav-link-text">Charts</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           <a class="nav-link" href="tables.html">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Harvest</span>
+            <span class="nav-link-text">Tables</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">History</span>
+            <span class="nav-link-text">Components</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="navbar.html">Commiunity</a>
+              <a href="navbar.html">Navbar</a>
             </li>
             <li>
               <a href="cards.html">Cards</a>
@@ -248,115 +224,178 @@
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>
+
     </div>
   </nav>
   <div class="content-wrapper">
-    <div class="container-fluid">
+    <div class="container-fluid" id = "Body-container">
+<!-- Body starts here  ========================================================================================================================================================  --> 
+
+    <section class="content">
       <div class="row">
-<br>
-<style>
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 20%;
-    margin-left: 1%;
-    background-image: url("img/tile1.jpg");
-}
-
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-    padding: 2px 16px;
-}
+        <div class="col-md-7">
+<!-- /////////////////////////////////////////////////////////////////////////////////// add php con -->
 
 
-</style>
 
 
-<?php
-include("config.php");
-  $sql = "SELECT distinct c.name  FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE f.name = '$name' AND f.farmerID=fc.farmerID AND v.cropID=c.cropID";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-        
-                    $sql2 = "SELECT DISTINCT s.info, fc.dateSc  FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE fc.farmerID = '1' AND s.stepID = fc.currentStepID AND f.farmerID=fc.farmerID AND v.cropID=c.cropID";
-                    $result2 = $conn->query($sql2);
-                    if ($result2->num_rows > 0) {
-                          while($row = $result2->fetch_assoc()) {
-                            $result_array[]=$row;
-                            foreach($result_array as $key=>$value){
-                            ?>
-                                <div class="card">
-                                <input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
-                                <div class="centered"><h2><?php echo $result_array[$key]["info"]; ?></h2>
-                                  <h5><?php echo $result_array[$key]["dateSc"]; ?></h5></div></div>
-                        <?php
 
-
-                            }
-                        }
-                     ?>
-                      <div class="card">
-                      <input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
-                      <div class="centered">Add new Crop</div>
-                      </div>
-                     <?php     
-
-
-                    }
-            }
-   
-    if ($result->num_rows == 0){?>
-      <div class="card">
-      <input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:90%"  />
-      <div class="centered">Add new Crop</div>
+      <h3>Start new Schedule</h3>
+      <h5>Projected Scheldue</h5><br>
+        </div>
+             <div class="col-md-5">
+      <h5>Crop : </h5>
+      <h5>Starting Date :</h5>
+      <h5>Land :</h5>
+      <h5>kit Avalibility :</h5><br>
+        </div>
       </div>
-    <?php } ?>
+      <div class="col-md-12 col-md-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="table-container">
+              <table class="table table-filter">
+                <tbody>
+                <?php
+                  include("config.php");
+                  $sql2 = "SELECT * FROM steps WHERE varietyID = '001-002' ORDER BY stepID ASC";
+                                
+                    $result = $conn->query($sql2);
+                    if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                                $result_array[]=$row;
+                                 
+                                  foreach($result_array as $key=>$value){
+                                
+                ?>
+                <tr data-status="pagado">
+                    <td>
+                      <div class="media">
+                        <a href="#" class="pull-left">
+                          <img src="<?php echo $result_array[$key]["stepPic"]; ?>" class="media-photo"> 
+                        </a>
+                        <div class="media-body">
+                          <span class="media-meta pull-right">Febrero 13, 2016</span>   
+                          <h4 class="title">
+                            <?php echo $result_array[$key]["info"]; ?>
+                            <span class="pull-right pagado"><h4>13/12</h4></span>
+                            <style>.table-filter .media-photo {
+                                width: 100px;
+                                padding-right: 10%;
+                              }
+                            </style>
+                          </h4>
+                          <p class="summary"><?php custom_echo($result_array[$key]["instruction"],100); ?></p>
+                          <div><input type="submit" value="more details" class="btnAddAction pull-right pagado" data-toggle="modal" data-target="#myModal"/></div>       
+                          <style>
+                            .btnAddAction{    background-color: #eb9e4f;
+                                              border: 0;
+                                              padding: 3px 10px;
+                                              margin-right: 8%;
+                                              color: #ffffff;
+                                              margin-left: 2px;
+                                              border-radius: 2px;
+                                          }
+                          </style>
+
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+  
+
+                                                                        
+                     
+                <?php }
+              }
+            }
+          
+
+function custom_echo($x, $length)
+{
+  if(strlen($x)<=$length)
+  {
+    echo $x;
+  }
+  else
+  {
+    $y=substr($x,0,$length) . '...';
+    echo $y;
+  }
+}
+                  ?>
+                  
 
 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+ 
+<div class="container">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
 </div>
 
 
-<style>
-	.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color:white;
-    font-family: sans-serif;
-    font-size: 30px;
-    text-align: center;
-}
-</style>
 
 
+         
+    <!--    <?php
+                  // include("config.php");
+                  // $i="0";
+                  // $sql = "SELECT stepID,stepPic,instruction,timeGap,info FROM steps WHERE varietyID LIKE '001-001' ORDER BY stepID ASC";
+                  //               $result = $conn->query($sql);
+                  //               if ($result->num_rows > 0) {
+                  //                     // output data of each row
+                  //                 $row=".";
+                  //   p                  while($row = $result->fetch_assoc()) {
+                  //                         $i++;
+                  //                         echo "<br>". "stepID: " . $row["stepID"]. "<br>" . "instruction: ". $row["instruction"]."<br>";
+                  //                         $_SESSION["stepID"] = $row["stepID"];
+                  //                         $_SESSION["stepPic"."$i"] = $row["stepPic"];
+                  //                         $_SESSION["instruction"."$i"] = $row["instruction"];
+                  //                         $_SESSION["timeGap"."$i"] = $row["timeGap"];
+                  //                         $_SESSION["info"] = $row["info"];
+                  //                       }
+                  //                     }
 
+                                         
+                                        
+                     
+    ?> -->
+<!-- Body ends here  ==========================================================================================================================================================  -->
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
-    <script src="js/sb-admin-charts.min.js"></script>
-
-    <script>
-  window.onload = function setUser(){
-  document.getElementById("navbar-brand").innerHTML ="Welcome " + 
-  "<?php echo($name)?>";
-}
-</script>
-
+  </div>
+</div>
 </body>
 
 </html>
