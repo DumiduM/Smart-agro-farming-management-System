@@ -260,6 +260,7 @@
     transition: 0.3s;
     width: 20%;
     margin-left: 1%;
+    margin-bottom: 1%;
     background-image: url("img/tile1.jpg");
 }
 
@@ -286,17 +287,17 @@ include("config.php");
                     if ($result2->num_rows > 0) {
                           while($row = $result2->fetch_assoc()) {
                             $result_array[]=$row;
-                            foreach($result_array as $key=>$value){
+                            ?><br><?php
+                            
+                        }
+                        foreach($result_array as $key=>$value){
                             ?>
                                 <div class="card">
                                 <input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
                                 <div class="centered"><h2><?php echo $result_array[$key]["info"]; ?></h2>
                                   <h5><?php echo $result_array[$key]["dateSc"]; ?></h5></div></div>
                         <?php
-
-
                             }
-                        }
                      ?>
                       <div class="card">
                       <input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
@@ -310,7 +311,7 @@ include("config.php");
    
     if ($result->num_rows == 0){?>
       <div class="card">
-      <input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:90%"  />
+      <input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
       <div class="centered">Add new Crop</div>
       </div>
     <?php } ?>
