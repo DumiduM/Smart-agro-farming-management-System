@@ -34,7 +34,7 @@ echo "<script type='text/javascript'>alert('check');</script>";
 
 
   if(isset($_POST['register'])){
-  $farmerID=$_POST['farmerID'];
+ 
   $farmerNIC=$_POST['farmerNIC'];
   $farmerName=$_POST['farmerName'];
   $farmerMobile=$_POST['farmerMobile'];
@@ -49,11 +49,12 @@ echo "<script type='text/javascript'>alert('check');</script>";
       	echo "<script type='text/javascript'>alert('Could not connect');</script>";
    }
    
-   $sql = "INSERT INTO farmer (farmerID,NIC,name,mobile,password,agriDiv) VALUES ( '$farmerID','$farmerNIC','$farmerName','$farmerMobile','$farmerPs','$farmerAgriDiv')";
+   $sql = "INSERT INTO farmer (NIC,name,mobile,password,agriDiv) VALUES ('$farmerNIC','$farmerName','$farmerMobile','$farmerPs','$farmerAgriDiv')";
 
    if ($conn->query($sql) === TRUE) {
         	echo "<script type='text/javascript'>alert('SQL DONE');</script>";
 	   mysqli_close($conn);
+	   $_SESSION['login_user'] = $farmerName;
    header("Location:home.php");
     exit;
 
@@ -67,7 +68,7 @@ echo "<script type='text/javascript'>alert('check');</script>";
    }
 
    else{
-      		echo "<script type='text/javascript'>alert('$Password doesn't match');</script>";
+      		echo "<script type='text/javascript'>alert('Password doesn't match');</script>";
 	}
 }
 
@@ -165,10 +166,10 @@ echo "<script type='text/javascript'>alert('check');</script>";
 			  	<hr>
 
 			  	<form method="POST">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label class="control-label" for=""></label>
                       <input type="text" name="farmerID" required class="form-control" placeholder="NIC">
-                    </div>
+                    </div> -->
 					<div class="form-group">
 					  <label class="control-label" for=""></label>
 					  <input type="text" name="farmerNIC"  required class="form-control" placeholder="NIC">

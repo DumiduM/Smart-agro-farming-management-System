@@ -20,7 +20,6 @@
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-  <link href="liststyle.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -229,199 +228,107 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid" id = "Body-container">
-<!-- Body starts here  ========================================================================================================================================================  --> 
+<!-- Body starts here  ========================================================================================================================================================  -->           
+    <div class="row">   
+              <div class="col-sm-8" id="row-banner" style="background-color:lavenderblush;">
+                 <?php 
+                    $j="0";
+                    // echo $_SESSION['i'];
+                    // echo $_SESSION['kannaType'];
+                    // echo $_SESSION['login_user'];
 
-    <section class="content">
-      <div class="row">
-        <div class="col-md-7">
-<!-- /////////////////////////////////////////////////////////////////////////////////// add php con -->
+                    while($j < $_SESSION['i']){
+                        $j++;
+                        $crop = $_SESSION["crop"."$j"];
+                      //  echo $priority =$_SESSION["priority"."$j"];
 
+                        $path = "img/banner/beans.jpg";
 
+                        if ($crop == "001"){
+                          $path = "img/banner/potato.jpg";
+                        }
+                        else if ($crop == "002"){
+                          $path = "img/banner/carrot.jpg";
+                        }
+                        else if ($crop == "003"){
+                          $path = "img/banner/beet.jpg";
+                        }
+                        else if ($crop == "004"){
+                          $path = "img/banner/beans.jpg";
+                        }
+                 ?>
+                    <script>
+                      addBanner("<?php echo "$path"; ?>");
+            
+                      function addBanner(<?php $path ?>) {
+                        var x = document.createElement("IMG");
+                        x.setAttribute("src","<?php echo "$path"; ?>");
+                        x.setAttribute("width","100%");
+                        // x.setAttribute("height", "228");
+                        // x.setAttribute("alt", "The Pulpit Rock");
+                        document.getElementById("row-banner").appendChild(x);
+                             
+                      }
+                    </script>
+                   <?php echo "<br><br>"; } ?>
+                   <form>
+                    <input type="submit" name="btn2" id="btnCk" value="cdvfdfdfd">
+                    <input type="submit" name="btn3" id="btnCk" value="dfdfd">
+                    </form>
 
-
-
-      <h3>Start new Schedule</h3>
-      <h5>Projected Scheldue</h5><br>
-        </div>
-             <div class="col-md-5">
-      <h5><strong>Crop : </strong>Potato</h5>
-      <h5><strong>Starting Date : </strong></h5>
-      <h5><strong>Land : </strong></h5>
-      <h5><strong>kit Avalibility : </strong></h5><br>
-        </div>
-      </div>
-      <div class="col-md-12 col-md-offset-2">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="table-container">
-              <table class="table table-filter">
-                <tbody>
+              </div>
+              <div class="col-sm-4" id="variety-col" style="background-color:lavender;">
+            
                 <?php
+                if($_GET){
+                  if(isset($_GET['btn2'])){
                   include("config.php");
-                  $sql2 = "SELECT * FROM steps WHERE varietyID = '001-001' ORDER BY stepID ASC";
-                                
-                    $result = $conn->query($sql2);
-                    if ($result->num_rows > 0) {
-                      while($row = $result->fetch_assoc()) {
-                                $result_array[]=$row;}
-                                 
-                                  foreach($result_array as $key=>$value){
-                                
+                  $sql = "SELECT varietyName,harvestRate,varietyPic FROM variety WHERE cropID LIKE '001'";
+                                $result = $conn->query($sql);
+                                if ($result->num_rows > 0) {
+                                      // output data of each row
+                                  $row=".";
+                                      while($row = $result->fetch_assoc()) {
+                                          echo "<br>". "Name: " . $row["varietyName"]. "<br>" . " harvestRate: "."<br>";
+                                          $variety_Path = $row["varietyPic"];
+                      
+                      ?>                    
+                                          <script>
+                      addBanner("<?php echo "$variety_Path"; ?>");
+            
+                      function addBanner(<?php $variety_Path ?>) {
+                        var x = document.createElement("IMG");
+                        x.setAttribute("src","<?php echo "$variety_Path"; ?>");
+                        x.setAttribute("width","40%");
+                        // x.setAttribute("height", "228");
+                        // x.setAttribute("alt", "The Pulpit Rock");
+                        document.getElementById("variety-col").appendChild(x);
+                             
+                      }
+                    </script>
+
+                    <?php
+                                      }
+                                  } else {
+                                      echo "No varietys found!";
+                                  }
+                                }
+                                }
+                                $_SESSION['variety_ID']="001";
                 ?>
-                <tr data-status="pagado">
-                    <td>
-                      <div class="media">
-                        <a href="#" class="pull-left">
-                          <img src="<?php echo $result_array[$key]["stepPic"]; ?>" class="media-photo"> 
-                        </a>
-                        <div class="media-body">
-                          <span class="media-meta pull-right">Febrero 13, 2016</span>   
-                          <h4 class="title">
-                            <?php echo $result_array[$key]["info"]; ?>
-                            <span class="pull-right pagado"><h4>13/12</h4></span>
-                            <style>.table-filter .media-photo {
-                                width: 100px;
-                                padding-right: 10%;
-                              }
-                            </style>
-                          </h4>
-                          <p class="summary"><?php custom_echo($result_array[$key]["instruction"],100); ?></p>
-                          <div><input type="submit" value="more details" class="btnAddAction pull-right pagado" data-toggle="modal" data-target="#myModal"/></div>       
-                          <style>
-                            .btnAddAction{    background-color: #eb9e4f;
-                                              border: 0;
-                                              padding: 3px 10px;
-                                              margin-right: 8%;
-                                              color: #ffffff;
-                                              margin-left: 2px;
-                                              border-radius: 2px;
-                                          }
-                          </style>
 
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-  
-
-                                                                        
-                     
-                <?php }
-              
-            }
-          
-
-function custom_echo($x, $length)
-{
-  if(strlen($x)<=$length)
-  {
-    echo $x;
-  }
-  else
-  {
-    $y=substr($x,0,$length) . '...';
-    echo $y;
-  }
-}
-                  ?>
-                  
-
-
-                </tbody>
-              </table>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
- 
-<div class="container">
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          
-        </div>
-        <div class="modal-body">
-          <img src="img\crop_types\potato\001\1.jpg" class="media-photo" style="width:100%; "> 
-          <p><strong>Purchace Seed Potatoes</strong></p>
-          <p>Potatoes are planted from seed potatoes, potato tubers that have sprouting buds on them. Use only certified seed potatoes as grocery-store potatoes can harbor diseases that may ruin an entire crop. You can order certified seed potatoes from a catalog or buy them at a local garden center. There are numerous potato varieties to choose from.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
     </div>
-  </div>
-  
-</div>
 
 
-
-<input type="button" class="btn btn-primary"  name="modify" value="Save Changes" onclick="myFunction()">
-
-<script>
-function myFunction() {
-    window.open("home.php");
-    this.exit;
-}
-</script>
-<?php
-
-
-// $sql = "SELECT varietyName,harvestRate,varietyPic,price FROM variety WHERE cropID LIKE '001'";
-//                                 $result = $conn->query($sql);
-//                                 if ($result->num_rows > 0) {
-//                                       // output data of each row
-//                                   $row=".";
-//                                       while($row = $result->fetch_assoc()) {
-//                                           echo "<br>". "Name: " . $row["varietyName"]. "<br>" . " harvestRate: ".$row["harvestRate"]."%"."<br>"."Current Price: ". $row["price"]. "<br>";
-//                                           $variety_Path = $row["varietyPic"];
-
-
-$sql = "INSERT INTO farmercrop (farmerID,verityID,CurrentStepID,dateSc) VALUES ('123','001-001','1','2018-06-13')";
-
-   if ($conn->query($sql) === TRUE) {
-          echo "<script type='text/javascript'>alert('SQL DONE');</script>";
-     mysqli_close($conn);
-
-  }
-  else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-    echo "<script type='text/javascript'>alert('SQL FAIL');</script>";
-  }
-
-
-
-?>
-    <!--    <?php
-                  // include("config.php");
-                  // $i="0";
-                  // $sql = "SELECT stepID,stepPic,instruction,timeGap,info FROM steps WHERE varietyID LIKE '001-001' ORDER BY stepID ASC";
-                  //               $result = $conn->query($sql);
-                  //               if ($result->num_rows > 0) {
-                  //                     // output data of each row
-                  //                 $row=".";
-                  //   p                  while($row = $result->fetch_assoc()) {
-                  //                         $i++;
-                  //                         echo "<br>". "stepID: " . $row["stepID"]. "<br>" . "instruction: ". $row["instruction"]."<br>";
-                  //                         $_SESSION["stepID"] = $row["stepID"];
-                  //                         $_SESSION["stepPic"."$i"] = $row["stepPic"];
-                  //                         $_SESSION["instruction"."$i"] = $row["instruction"];
-                  //                         $_SESSION["timeGap"."$i"] = $row["timeGap"];
-                  //                         $_SESSION["info"] = $row["info"];
-                  //                       }
-                  //                     }
-
-                                         
-                                        
-                     
-    ?> -->
+  <style>
+    .row1{
+      width: 70%;
+    }
+    .row2{
+      margin-left: 70%;
+    }
+  </style>
 <!-- Body ends here  ==========================================================================================================================================================  -->
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

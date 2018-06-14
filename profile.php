@@ -10,6 +10,42 @@
     // echo "<script type='text/javascript'>alert('$name');</script>";
   }
 
+                                          include("config.php");
+                                          $farmerID = "";
+                                          $NIC = "";
+                                          $fname = "";
+                                          $lname = "";
+                                          $mobile = "";
+                                          $email = "";
+                                          $farmerID = "";
+                                          $farmerPic = "";
+                                          $password = "";
+                                          $agriDiv = "";
+
+  $sql = "SELECT farmerID,NIC,email,lname,name,mobile,farmerPic,password,agriDiv FROM farmer WHERE name LIKE '$name'";
+                                $result = $conn->query($sql);
+
+                                 if ($result->num_rows > 0) {
+                                      // output data of each row
+                                  $row=".";
+                                      while($row = $result->fetch_assoc()) {
+                                          // echo "<br>". "district: " . $row["district"]. "<br>" . " yalaStart: " . $row["yalaStart"]. "<br>". " yalaEnd: " . $row["yalaEnd"]. "<br>".  " mahaStart: " . $row["mahaStart"]."<br>". " mahaEnd: " . $row["mahaEnd"]. "<br>";
+                                          $farmerID = $row["farmerID"];
+                                          $NIC = $row["NIC"];
+                                          $fname = $row["name"];
+                                          $lname = $row["lname"];
+                                          $mobile = $row["mobile"];
+                                          $email = $row["email"];
+                                          $farmerID = $row["farmerID"];
+                                          $farmerPic = $row["farmerPic"];
+                                          $password = $row["password"];
+                                          $agriDiv = $row["agriDiv"];
+
+                                      }
+                                  } else {
+                                      echo "0 results";
+                                  }
+
 
 ?>
 
@@ -51,7 +87,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="home.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
@@ -248,7 +284,7 @@
     <div class="container-fluid">
 <!-- ==================================================================================================================================================================== -->
 
-<div class="container">
+<div class="container-fluid">
     <h1>Edit Profile</h1>
     <hr>
   <div class="row">
@@ -270,41 +306,48 @@
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
         <div class="alert alert-info alert-dismissable">
+                                          <!-- $NIC = $row["NIC"];
+                                          $fname = $row["name"];
+                                          $mobile = $row["mobile"];
+                                          $farmerID = $row["farmerID"];
+                                          $farmerPic = $row["farmerPic"];
+                                          $password = $row["password"];
+                                          $agriDiv = $row["agriDiv"]; -->
           <a class="panel-close close" data-dismiss="alert">×</a> 
           <i class="fa fa-coffee"></i>
           Please make sure to add <strong> accurate </strong>data.
         </div>
         <h3>Personal info</h3>
         
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" >
           <div class="form-group">
             <label class="col-lg-3 control-label">First name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="Jane">
+              <input class="form-control" name="fname" type="text" value="<?php echo"$fname" ?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Last name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="">
+              <input class="form-control" name="lname" type="text" value="<?php echo"$lname" ?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">NIC:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="Bishop">
+              <input class="form-control" name="NIC" type="text" value="<?php echo"$NIC" ?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">mobile:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="">
+              <input class="form-control" name="mobile" type="text" value="<?php echo"$mobile" ?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="someone@efarmer.com">
+              <input class="form-control" name="email" type="text" value="<?php echo"$email" ?>">
             </div>
           </div>
           <div class="form-group">
@@ -327,25 +370,25 @@
           <div class="form-group">
             <label class="col-md-3 control-label">Username:</label>
             <div class="col-md-8">
-              <input class="form-control" type="text" value="janeuser">
+              <input class="form-control" name="uname" type="text" value=""<?php echo"$name" ?>"">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label">Password:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" value="11111122333">
+              <input class="form-control" name="ps1" type="password" value="">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label">Confirm password:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" value="11111122333">
+              <input class="form-control" name="ps2" type="password" value="">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label"></label>
             <div class="col-md-8">
-              <input type="button" class="btn btn-primary" value="Save Changes">
+              <input type="submit" class="btn btn-primary"  name="modify" value="Save Changes" action ="">
               <span></span>
               <input type="reset" class="btn btn-default" value="Cancel">
             </div>
@@ -355,14 +398,54 @@
   </div>
 </div>
 <hr>
+</div>
+</div>
+
+<?php
+
+  if(isset($_POST['modify'])){
+echo "<script type='text/javascript'>alert('SQL DONE');</script>";
+    
+    $NIC = $_POST["NIC"];
+    $fname = $_POST["fname"];
+    $lname = $_POST["lname"];
+    $mobile = $_POST["mobile"];
+    $email =$_POST["email"];
+    //$farmerPic = $_POST["farmerPic"];
+    $password1 = $_POST["ps1"];
+    $password2 = $_POST["ps2"];
+    
+    // $agriDiv = $_POST["agriDiv"];
+
+//     UPDATE table_name
+// SET column1=value, column2=value2,...
+// WHERE some_column=some_value 
 
 
+  if ($password1==$password2) {   
+   
+   $sql = "UPDATE farmer SET NIC='$NIC',name='$fname',lname='$lname',mobile='$mobile',email='$email',password='$password1' WHERE farmerID LIKE '$farmerID'";
 
+   if ($conn->query($sql) === TRUE) {
+          echo "<script type='text/javascript'>alert('SQL DONE');</script>";
+    
+   }
+  else {
+    echo "<script type='text/javascript'>alert('SQL FAIL');</script>";
+  }
+
+
+   }
+
+   else{
+          echo "<script type='text/javascript'>alert('Password doesn't match');</script>";
+  }
+}
+?>
 
 <!-- ====================================================================================================================================================================       -->
 
-</div>
-</div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

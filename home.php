@@ -25,6 +25,55 @@
 <html lang="en">
 
 <head>
+
+  <div class="container">
+<a href="https://www.accuweather.com/en/lk/nuwara-eliya/307308/weather-forecast/307308" class="aw-widget-legal">
+
+</a><div id="awcc1528797381923" class="aw-widget-current"  data-locationkey="307308" data-unit="c" data-language="en-us" data-useip="false" data-uid="awcc1528797381923"></div><script type="text/javascript" src="https://oap.accuweather.com/launch.js"></script><br><br>
+
+<script type="text/javascript" src="accW.js"></script>
+<style>
+
+
+div.aw-widget-current-inner a.aw-toggle {
+    -webkit-border-radius: 0 0 4px 4px!important;
+    -moz-border-radius: 0 0 4px 4px!important;
+    border-radius: 0 0 4px 4px!important;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.15)!important;
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.15)!important;
+    box-shadow: 0 1px 1px rgba(0,0,0,.15)!important;
+    position: absolute!important;
+    z-index: 10!important;
+    width: 26px!important;
+    height: 16px!important;
+    background: #e9e9e9!important;
+    bottom: 0!important; 
+    right: 10px!important; 
+    border: 1px solid #dcdcdc!important;
+    display: none!important;
+}
+
+.container {
+    width: 100%;
+     padding-right: 15px; 
+     padding-left: 15px; 
+     margin-right: auto; 
+    margin-left: auto;
+
+
+       width:100%;
+    height:100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+.bg-dark {
+    background-color: #343a40!important;
+}
+</style>
+
+</div>
+
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -46,24 +95,35 @@
   
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+
+
+
     <img src="img/logo.png"  class="logo1"alt="Homepage">
-    <a class="navbar-brand" id="navbar-brand" href="index.html">E-Farmer</a>
+    <a class="navbar-brand" id="navbar-brand" href="profile.php">E-Farmer</a>
     <style>img.logo1{
 	height: 50px;
 }</style>
+
+
+
+
+
+
+
+
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link" href="weather.php">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Weather</span>
           </a>
@@ -154,7 +214,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-envelope"></i>
             <span class="d-lg-none">Messages
@@ -187,7 +247,7 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item small" href="#">View all messages</a>
           </div>
-        </li>
+        </li> -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-bell"></i>
@@ -250,7 +310,7 @@
       </ul>
     </div>
   </nav>
-  <div class="content-wrapper">
+  <div class="content-wrapper" id="bodyhome">
     <div class="container-fluid">
       <div class="row">
 <br>
@@ -271,7 +331,9 @@
 .container {
     padding: 2px 16px;
 }
-
+#bodyhome{
+  background-image: "img/bg1.jpg";
+}
 
 </style>
 
@@ -282,7 +344,7 @@ include("config.php");
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
         
-                    $sql2 = "SELECT DISTINCT s.info, fc.dateSc  FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE fc.farmerID = '1' AND s.stepID = fc.currentStepID AND f.farmerID=fc.farmerID AND v.cropID=c.cropID";
+                    $sql2 = "SELECT DISTINCT s.info, fc.dateSc  FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE fc.farmerID = '123' AND s.stepID = fc.currentStepID AND f.farmerID=fc.farmerID AND v.cropID=c.cropID";
                     $result2 = $conn->query($sql2);
                     if ($result2->num_rows > 0) {
                           while($row = $result2->fetch_assoc()) {

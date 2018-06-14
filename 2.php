@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <title>E-farmer</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -254,7 +254,7 @@
         <div class="col-md-6">
           <form class="form-horizontal" method="post" action="">
                             <div class="form-group">
-                              <label class="control-label col-sm-2" for="landsize">Land size : </label>
+                              <label class="control-label col-sm-4" for="landsize">Land size : </label>
                               <div class="col-sm-10">
                                 <row>
                                 <input type="number" name="landsize" class="form-control" placeholder="Type here your land size" value="<?= isset($_POST['landsize']) ? htmlspecialchars($_POST['landsize']) : '' ?>" />
@@ -268,27 +268,48 @@
                             </div>
 
                             <div class="form-group">
-                              <label class="control-label col-sm-2" for="location">Location : </label>
+                              <label class="control-label col-sm-4" for="location">Location : </label>
                               <div class="col-sm-10">
                                 <input type="text" id="pac-input" name="location" class="controls" placeholder="Enter your location">
                               </div>
                             </div>
 
                             <div class="form-group">
-                              <label class="control-label col-sm-2" for="date">Date : </label>
-                              <div class="col-sm-10">
-                                <input type="date" name="date" id="pac-input"  class="controls" >
+                              <label class="control-label col-sm-4" for="date">Start plan Date : </label>
+                              <div class="col-sm-12">
+                                <input type="date" name="date"  class="controls" >
                               </div>
                             </div>
 
                           
                             <div class="form-group">
-                              <label class="control-label col-sm-4" for="button">Set-up if e-farmer kit is avaliable </label>
+                              <label class="control-label col-sm-7" for="button">Set-up if e-farmer kit is avaliable </label>
                               <button type="input" name="kit_av" class="btn btn-success" value="1">Click here</button>
                             </div>
+                            <div class="form-group">
+                              <div class="col-sm-12">
+                            <button type="submit" name="submit" class="btn btn-success control-label col-sm-4" onclick="myfunction();" style="font-size: 20px;">Submit</button>
 
-                            <button type="submit" name="submit" class="btn btn-success control-label col-sm-2" style="font-size: 20px;">Submit</button>
-                          
+                            <script>
+                            function myfunction() {
+                                window.open("3.php");
+                                this.exit;
+                            }
+                            </script>
+
+                            </div>
+                          </div>
+
+                          <script type="text/javascript">
+                            function split(str) {
+                             var i = str.indexOf("'");
+
+                             if(i > 0)
+                              return  str.slice(0, i);
+                             else
+                              return "";     
+                            }
+                          </script>
                             <?php
 
                             
@@ -337,7 +358,7 @@
                                       // output data of each row
                                   $row=".";
                                       while($row = $result->fetch_assoc()) {
-                                          echo "<br>". "district: " . $row["district"]. "<br>" . " yalaStart: " . $row["yalaStart"]. "<br>". " yalaEnd: " . $row["yalaEnd"]. "<br>".  " mahaStart: " . $row["mahaStart"]."<br>". " mahaEnd: " . $row["mahaEnd"]. "<br>";
+                                          // echo "<br>". "district: " . $row["district"]. "<br>" . " yalaStart: " . $row["yalaStart"]. "<br>". " yalaEnd: " . $row["yalaEnd"]. "<br>".  " mahaStart: " . $row["mahaStart"]."<br>". " mahaEnd: " . $row["mahaEnd"]. "<br>";
                                           $yalaStart = $row["yalaStart"];
                                           $yalaEnd = $row["yalaEnd"];
                                           $mahaStart = $row["mahaStart"];
@@ -380,30 +401,33 @@
                                       
                                           while($row = $result->fetch_assoc()) {
                                             $i++;
-                                            echo "<br>". "crop: " . $row["cropID"]. "priority: " . $row["priority"];
+                                            // echo "<br>". "crop: " . $row["cropID"]. "priority: " . $row["priority"];
                                             $_SESSION["crop"."$i"] = $row["cropID"];
                                             $_SESSION["priority"."$i"] = $row["priority"];
-                                            echo $kannaType;
+                                            // echo $kannaType;
                                           }
                                         }
                                       $conn->close();
                   //echo "$kannaType";
                   $_SESSION['kannaType'] = $kannaType;
                   $_SESSION['i']=$i;
+                  $_SESSION['date'] = $date;
                   }
 
                   //echo $_SESSION["kannaType"];
 
                     $j="0";
-                    echo '<br>';
+                    // echo '<br>';
 
-                     echo '<br>';
+                    //  echo '<br>';
                     while ($j<$i){
                       $j++;
-                      echo $_SESSION["crop"."$j"]." " ;
-                      echo $_SESSION["priority"."$j"]."<br>";
+
+                      // echo $_SESSION["crop"."$j"]." " ;
+                      // echo $_SESSION["priority"."$j"]."<br>";
                       
                     }
+                    // header( 'Location: 3.php' );
                   ?>
 
           </form>

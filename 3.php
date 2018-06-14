@@ -229,8 +229,10 @@
   <div class="content-wrapper">
     <div class="container-fluid" id = "Body-container">
 <!-- Body starts here  ========================================================================================================================================================  -->           
-    <div class="row">   
-              <div class="col-sm-8" id="row-banner" style="background-color:lavenderblush;">
+    <div class="row">  
+      <a href=""> 
+              <div class="col-sm-8" id="row-banner" onclick = "bannerChange();" style="background-color:lavenderblush;">
+                </a>
                  <?php 
                     $j="0";
                     // echo $_SESSION['i'];
@@ -257,6 +259,7 @@
                           $path = "img/banner/beans.jpg";
                         }
                  ?>
+                 
                     <script>
                       addBanner("<?php echo "$path"; ?>");
             
@@ -270,6 +273,7 @@
                              
                       }
                     </script>
+                    
                    <?php echo "<br><br>"; } ?>
                    <form>
                     <input type="submit" name="btn2" id="btnCk" value="cdvfdfdfd">
@@ -277,23 +281,32 @@
                     </form>
 
               </div>
-              <div class="col-sm-4" id="variety-col" style="background-color:lavender;">
+              <div class="col-sm-4" id="variety-col" onclick="myFunction();" style="background-color:lavender;">
+
+                <script>
+function myFunction() {
+    window.open("4.php");
+    this.exit;
+}
+
+
+</script>
             
                 <?php
                 if($_GET){
                   if(isset($_GET['btn2'])){
                   include("config.php");
-                  $sql = "SELECT varietyName,harvestRate,varietyPic FROM variety WHERE cropID LIKE '001'";
+                  $sql = "SELECT varietyName,harvestRate,varietyPic,price FROM variety WHERE cropID LIKE '001'";
                                 $result = $conn->query($sql);
                                 if ($result->num_rows > 0) {
                                       // output data of each row
                                   $row=".";
                                       while($row = $result->fetch_assoc()) {
-                                          echo "<br>". "Name: " . $row["varietyName"]. "<br>" . " harvestRate: "."<br>";
+                                          echo "<br>". "Name: " . $row["varietyName"]. "<br>" . " harvestRate: ".$row["harvestRate"]."%"."<br>"."Current Price: ". $row["price"]. "<br>";
                                           $variety_Path = $row["varietyPic"];
                       
                       ?>                    
-                                          <script>
+                      <script>
                       addBanner("<?php echo "$variety_Path"; ?>");
             
                       function addBanner(<?php $variety_Path ?>) {
