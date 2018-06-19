@@ -228,10 +228,28 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid" id = "Body-container">
-<!-- Body starts here  ========================================================================================================================================================  -->           
+<!-- Body starts here  ========================================================================================================================================================  --><script>
+      function getVariety(str){
+        // alert(str);
+            if (window.XMLHttpRequest) {
+              // code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp=new XMLHttpRequest();
+            } else { // code for IE6, IE5
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function() {
+              if (this.readyState==4 && this.status==200) {
+                document.getElementById("variety-col").innerHTML=this.responseText;
+              }
+            }
+            xmlhttp.open("GET","getVariety.php?q="+str,true);
+            xmlhttp.send();
+          }
+</script>
+
     <div class="row">  
       <a href=""> 
-              <div class="col-sm-8" id="row-banner" onclick = "bannerChange();" style="background-color:lavenderblush;">
+              <div class="col-sm-8" id="row-banner" style="background-color:lavenderblush;">
                 </a>
                  <?php 
                     $j="0";
@@ -260,75 +278,22 @@
                         }
                  ?>
                  
-                    <script>
-                      addBanner("<?php echo "$path"; ?>");
-            
-                      function addBanner(<?php $path ?>) {
-                        var x = document.createElement("IMG");
-                        x.setAttribute("src","<?php echo "$path"; ?>");
-                        x.setAttribute("width","100%");
-                        // x.setAttribute("height", "228");
-                        // x.setAttribute("alt", "The Pulpit Rock");
-                        document.getElementById("row-banner").appendChild(x);
-                             
-                      }
-                    </script>
-                    
-                   <?php echo "<br><br>"; } ?>
-                   <form>
-                    <input type="submit" name="btn2" id="btnCk" value="cdvfdfdfd">
-                    <input type="submit" name="btn3" id="btnCk" value="dfdfd">
-                    </form>
 
+                  <input type="image" src="<?php echo $path ?>" onClick="getVariety('<?php echo $crop ?>')"  class = "tile" alt="Avatar" style="width:100%"  />
+
+                   <?php echo "<br><br>"; } ?>
+                 
               </div>
-              <div class="col-sm-4" id="variety-col" onclick="myFunction();" style="background-color:lavender;">
+              <div class="col-sm-4" id="variety-col" onclick="" style="background-color:lavender;">
 
                 <script>
-function myFunction() {
-    window.open("4.php");
-    this.exit;
-}
-
-
-</script>
+                function myFunction() {
+                    window.open("4.php");
+                    this.exit;
+                }
+                </script>
             
-                <?php
-                if($_GET){
-                  if(isset($_GET['btn2'])){
-                  include("config.php");
-                  $sql = "SELECT varietyName,harvestRate,varietyPic,price FROM variety WHERE cropID LIKE '001'";
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                      // output data of each row
-                                  $row=".";
-                                      while($row = $result->fetch_assoc()) {
-                                          echo "<br>". "Name: " . $row["varietyName"]. "<br>" . " harvestRate: ".$row["harvestRate"]."%"."<br>"."Current Price: ". $row["price"]. "<br>";
-                                          $variety_Path = $row["varietyPic"];
-                      
-                      ?>                    
-                      <script>
-                      addBanner("<?php echo "$variety_Path"; ?>");
-            
-                      function addBanner(<?php $variety_Path ?>) {
-                        var x = document.createElement("IMG");
-                        x.setAttribute("src","<?php echo "$variety_Path"; ?>");
-                        x.setAttribute("width","40%");
-                        // x.setAttribute("height", "228");
-                        // x.setAttribute("alt", "The Pulpit Rock");
-                        document.getElementById("variety-col").appendChild(x);
-                             
-                      }
-                    </script>
-
-                    <?php
-                                      }
-                                  } else {
-                                      echo "No varietys found!";
-                                  }
-                                }
-                                }
-                                $_SESSION['variety_ID']="001";
-                ?>
+                
 
             </div>
     </div>
@@ -350,6 +315,7 @@ function myFunction() {
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
+    <script src="js/script.js"></script>
   </div>
 </div>
 </body>
