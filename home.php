@@ -340,11 +340,11 @@ div.aw-widget-current-inner a.aw-toggle {
 
 <?php
 include("config.php");
-  $sql = "SELECT distinct c.name  FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE f.name = '$name' AND f.farmerID=fc.farmerID AND v.cropID=c.cropID";
+  $sql = "SELECT distinct c.name  FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE f.name = '$name' AND f.farmerID=fc.farmerID AND v.cropID=c.cropID AND fc.verityID=v.variety";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
-        
-                    $sql2 = "SELECT DISTINCT s.info, fc.dateSc  FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE fc.farmerID = '123' AND s.stepID = fc.currentStepID AND f.farmerID=fc.farmerID AND v.cropID=c.cropID";
+        echo "string";
+                    $sql2 = "SELECT DISTINCT s.info, fc.dateSc  FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE fc.farmerID = '$name' AND s.stepID = fc.currentStepID AND f.farmerID=fc.farmerID AND v.cropID=c.cropID";
                     $result2 = $conn->query($sql2);
                     if ($result2->num_rows > 0) {
                           while($row = $result2->fetch_assoc()) {

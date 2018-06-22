@@ -20,6 +20,8 @@
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+
+
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -245,8 +247,17 @@
             xmlhttp.open("GET","getVariety.php?q="+str,true);
             xmlhttp.send();
           }
-</script>
 
+          
+</script>
+<script>
+                function myFunction() {
+                    alert(' <?php echo $row["varietyID"] ?>');
+                    <?php $_SESSION['variety_ID']=$row["varietyID"]; ?>
+                    // window.open("4.php");
+                    // this.exit;
+                }
+                </script>
     <div class="row">  
       <a href=""> 
               <div class="col-sm-8" id="row-banner" style="background-color:lavenderblush;">
@@ -280,21 +291,13 @@
                  
 
                   <input type="image" src="<?php echo $path ?>" onClick="getVariety('<?php echo $crop ?>')"  class = "tile" alt="Avatar" style="width:100%"  />
-
+                
                    <?php echo "<br><br>"; } ?>
                  
               </div>
               <div class="col-sm-4" id="variety-col" onclick="" style="background-color:lavender;">
 
-                <script>
-                function myFunction() {
-                    window.open("4.php");
-                    this.exit;
-                }
-                </script>
-            
                 
-
             </div>
     </div>
 

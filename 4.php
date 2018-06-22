@@ -1,5 +1,9 @@
 <?php
   session_start();
+  $varietyID=$_GET['varietyID'];
+  $user=$_SESSION['login_user'];
+  $date=$_SESSION['date'];
+  $name=$_SESSION['cropName'];
 ?>
 
 <!DOCTYPE html>
@@ -244,8 +248,8 @@
       <h5>Projected Scheldue</h5><br>
         </div>
              <div class="col-md-5">
-      <h5><strong>Crop : </strong>Potato</h5>
-      <h5><strong>Starting Date : </strong></h5>
+      <h5><strong>Crop : </strong> <?php echo $name;?></h5>
+      <h5><strong>Starting Date : </strong> <?php echo $date;?></h5>
       <h5><strong>Land : </strong></h5>
       <h5><strong>kit Avalibility : </strong></h5><br>
         </div>
@@ -258,7 +262,7 @@
                 <tbody>
                 <?php
                   include("config.php");
-                  $sql2 = "SELECT * FROM steps WHERE varietyID = '001-001' ORDER BY stepID ASC";
+                  $sql2 = "SELECT * FROM steps WHERE varietyID = '$varietyID' ORDER BY stepID ASC";
                                 
                     $result = $conn->query($sql2);
                     if ($result->num_rows > 0) {
@@ -298,12 +302,39 @@
                                           }
                           </style>
 
+                          <div class="container">
+                              <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      
+                                    </div>
+                                    <div class="modal-body">
+                                      <img src="<?php echo $result_array[$key]["stepPic"]; ?>" class="media-photo" style="width:100%; "> 
+                                      <p><strong><?php echo $result_array[$key]["info"] ?></strong></p>
+                                      <p><?php echo $result_array[$key]["instruction"] ?></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                              
+                            </div>
+
+
+
                         </div>
                       </div>
                     </td>
                   </tr>
   
-
+                  
                                                                         
                      
                 <?php }
@@ -336,35 +367,29 @@ function custom_echo($x, $length)
     </section>
 
  
-<div class="container">
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          
-        </div>
-        <div class="modal-body">
-          <img src="img\crop_types\potato\001\1.jpg" class="media-photo" style="width:100%; "> 
-          <p><strong>Purchace Seed Potatoes</strong></p>
-          <p>Potatoes are planted from seed potatoes, potato tubers that have sprouting buds on them. Use only certified seed potatoes as grocery-store potatoes can harbor diseases that may ruin an entire crop. You can order certified seed potatoes from a catalog or buy them at a local garden center. There are numerous potato varieties to choose from.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  
-</div>
 
 
 
-<input type="button" class="btn btn-primary"  name="modify" value="Save Changes" onclick="myFunction()">
+<form method="POST" action="home.php">
+<input type="submit" class="btn btn-primary" value="save" name="save">
+</form>
 
+<?php
+if(isset($_POST['save'])){
+
+    $sql = "INSERT INTO farmercrop (farmerID,verityID,CurrentStepID,dateSc) VALUES ('$user','$varietyID','1','$date')";
+
+       if ($conn->query($sql) === TRUE) {
+              //echo "<script type='text/javascript'>alert('SQL DONE');</script>";
+         mysqli_close($conn);echo "string";
+
+      }
+      else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "<script type='text/javascript'>alert('SQL FAIL');</script>";
+     }
+}
+?>
 <script>
 function myFunction() {
     window.open("home.php");
@@ -382,19 +407,6 @@ function myFunction() {
 //                                       while($row = $result->fetch_assoc()) {
 //                                           echo "<br>". "Name: " . $row["varietyName"]. "<br>" . " harvestRate: ".$row["harvestRate"]."%"."<br>"."Current Price: ". $row["price"]. "<br>";
 //                                           $variety_Path = $row["varietyPic"];
-
-
-$sql = "INSERT INTO farmercrop (farmerID,verityID,CurrentStepID,dateSc) VALUES ('123','001-001','1','2018-06-13')";
-
-   if ($conn->query($sql) === TRUE) {
-          echo "<script type='text/javascript'>alert('SQL DONE');</script>";
-     mysqli_close($conn);
-
-  }
-  else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-    echo "<script type='text/javascript'>alert('SQL FAIL');</script>";
-  }
 
 
 

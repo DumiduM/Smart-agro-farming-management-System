@@ -288,7 +288,7 @@
                             </div>
                             <div class="form-group">
                               <div class="col-sm-12">
-                            <button type="submit" name="submit" class="btn btn-success control-label col-sm-4" onclick="myfunction();" style="font-size: 20px;">Submit</button>
+                            <button type="submit" name="submit" class="btn btn-success control-label col-sm-4" onclick="myfunction();"  style="font-size: 20px;">Submit</button>
 
                             <script>
                             function myfunction() {
