@@ -370,14 +370,17 @@ function custom_echo($x, $length)
 
 
 
-<form method="POST" action="home.php">
+<form method="POST" action="">
 <input type="submit" class="btn btn-primary" value="save" name="save">
 </form>
 
 <?php
 if(isset($_POST['save'])){
 
-    $sql = "INSERT INTO farmercrop (farmerID,verityID,CurrentStepID,dateSc) VALUES ('$user','$varietyID','1','$date')";
+    
+      // $farmerID = $_SESSION['farmerID'];
+
+    $sql = "INSERT INTO farmercrop (farmerID,verityID,CurrentStepID,dateSc) VALUES ('$farmerID','$varietyID','1','$date')";
 
        if ($conn->query($sql) === TRUE) {
               //echo "<script type='text/javascript'>alert('SQL DONE');</script>";

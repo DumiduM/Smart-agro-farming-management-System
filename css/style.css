@@ -116,3 +116,24 @@ img.background{
     padding: 2px 16px;
 }
 
+
+
+
+.mapdiv{
+    width:100%;
+    margin: auto;
+}
+
+.mapdiv path {
+    fill: #036057;
+    stroke: #073833;
+    stroke-width:2px;
+    transition: fill 2.0s;
+}
+
+.mapdiv :hover {
+    fill:#16ba8b;
+}
+.mapdiv{
+	width: 50%;
+}

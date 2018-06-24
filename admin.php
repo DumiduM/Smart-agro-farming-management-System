@@ -306,167 +306,10 @@ div.aw-widget-current-inner a.aw-toggle {
   </nav>
   <div class="content-wrapper" id="bodyhome">
     <div class="container-fluid">
-      <div class="row">
-<br>
-<style>
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 20%;
-    margin-left: 1%;
-    margin-bottom: 1%;
-    background-image: url("img/tile1.jpg");
-}
-
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-    padding: 2px 16px;
-}
-#bodyhome{
-  background-image: "img/bg1.jpg";
-}
-
-</style>
+<!-- ================================================================================================================= -->
 
 
-<?php
-include("config.php");
-  $getuserID_SQL = "SELECT farmerID from farmer WHERE name LIKE '$name'";
-    $result2 = $conn->query($getuserID_SQL);
-    if ($result2->num_rows > 0) {;
-      // 
-    while($row = $result2->fetch_assoc()) {
-      $_SESSION['farmerID'] =  $row["farmerID"];
-      $farmerID =  $_SESSION['farmerID'];
-      // echo "$row['farmerID']";
-    }}
-  $sql = "SELECT c.name  FROM crop c,variety v,farmercrop fc,farmer f WHERE f.name = '$name' AND f.farmerID=fc.farmerID AND v.cropID=c.cropID AND fc.verityID=v.varietyID";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                    $sql2 = "SELECT DISTINCT fc.scheduleID,s.info, fc.dateSc  FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE fc.farmerID = '2' AND s.stepID = fc.currentStepID AND f.farmerID=fc.farmerID AND v.cropID=c.cropID";
-                    $result2 = $conn->query($sql2);
-                    if ($result2->num_rows > 0) {
-                          while($row = $result2->fetch_assoc()) {
-                            $result_array[]=$row;
-                            ?><br><?php
-                            
-                        }
-                        foreach($result_array as $key=>$value){
-                            ?>
-                            <!-- home.php?code=<?php echo $result_array[$key]["scheduleID"]; ?> -->
-                                <div class="card">
-                                  <form method="POST" action="">
-                                <input type="image" src="img/tile2.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
-                                <div class="centered"><h2><?php echo $result_array[$key]["info"]; ?></h2>
-                                  <label class="info"><h6><?php echo $result_array[$key]["dateSc"]; ?></h6></label>
-                                  <button type="submit" class="btn btn-primary" name="done" value="done" data-toggle="modal" data-target="#myModal">  Done   </button>
-                                  <button type="submit" class="btn btn-warning"  name="details" onsubmit="event.preventDefault();"> More Details </button>
-                                  <input type="hidden" name="key" value="<?php echo $result_array[$key]["scheduleID"]; ?>">
-                                  <style type="text/css">
-                                    .btn{
-                                      border-radius: 26px;
-                                      color: white;
-                                    }
-                                  </style>
-
-
-                                  <!-- <div><input type="submit" value="more details" class="btnAddAction pull-right pagado" data-toggle="modal" data-target="#myModal"/> -->
-
-
-                                </div>
-                                </form>
-                              </div>
-
-                        <?php
-                            }
-                     ?>
-                      <div class="card">
-                      <input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
-                      <div class="centered">Add new Crop</div>
-                      </div>
-                     <?php     
-
-
-                    }
-            }
-   
-    if ($result->num_rows == 0){?>
-      <div class="card">
-      <input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
-      <div class="centered">Start Cultivating !</div>
-      </div>
-    <?php } ?>
-
-    <?php
-        if(isset($_POST['done'])){
-        echo $_POST['key'];
-        echo "<script type='text/javascript'>
-			$(document).ready(function(){
-			$('#myModal').modal('modal');
-			});
-			</script>";
-      }
-    ?>
-
-
-
-
-
-
-</div>
-      <!-- DATA MODAL -->
-      <div class="container">
-        <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog">
-          
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                
-              </div>
-              <div class="modal-body">
-                <img src="<?php echo "sdsd" ?>" class="media-photo" style="width:100%; "> 
-                <p><strong><?php echo "sd" ?></strong></p>
-                <p><?php echo "sds" ?></p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        
-      </div>
-
-
-
-
-
-
-
-
-
-<style>
-	.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color:white;
-    font-family: sans-serif;
-    font-size: 30px;
-    text-align: center;
-}
-</style>
-
-
-
-
+<!-- =============================================================================================================== -->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -482,13 +325,8 @@ include("config.php");
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/sb-admin-charts.min.js"></script>
-
-    <script>
-  window.onload = function setUser(){
-  document.getElementById("navbar-brand").innerHTML ="Welcome " + 
-  "<?php echo($name)?>";
-}
-</script>
+</div>
+</div>
 
 </body>
 
