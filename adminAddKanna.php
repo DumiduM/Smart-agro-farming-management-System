@@ -53,6 +53,27 @@
             background-color: #343a40!important;
             }
          </style>
+             <style type="text/css">
+       .mapdiv{
+    width:100%;
+    margin: auto;
+}
+
+.mapdiv path {
+    fill: #036057;
+    stroke: #073833;
+    stroke-width:2px;
+    transition: fill 2.0s;
+}
+
+.mapdiv :hover {
+    fill:#16ba8b;
+}
+.mapdiv{
+   width: 50%;
+}
+    </style>
+
       </div>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -282,9 +303,9 @@
       <div class="content-wrapper" id="bodyhome">
          <div class="container-fluid">
             <label>
-               <h2>Add new Crop</h2>
+               <h2>Add Kanna</h2>
             </label>
-            <div class="form-group">
+            <!-- <div class="form-group">
                <div class="row">
                   <div class="col-md-2">
                      <label for="usr">Name:</label>
@@ -298,19 +319,19 @@
                   <div class="col-md-3">
                      <input type="text" class="form-control" id="usr" placeholder="பயிர்(தமிழ்)">
                   </div>
-               </div>
-            </div>
+               </div> -->
+            
             <div class="form-group">
                <div class="row">
                   <div class="col-md-2">
-                     <label for="type">crop type:</label>
+                     <label for="type">Year:</label>
                   </div>
                   <div class="col-md-3">
                      <select class="form-control">
-                        <option>Vegetable</option>
-                        <option>Bean</option>
-                        <option>Grain</option>
-                        <option>Fruit</option>
+                        <option>2018</option>
+                        <option>2019</option>
+                        <option>2019</option>
+                        <option>2020</option>
                      </select>
                   </div>
                </div>
@@ -448,7 +469,7 @@
                             document.getElementById("cropTable").innerHTML=this.responseText;
                           }
                         }
-                        xmlhttp.open("GET","getTable.php?q="+str,true);
+                        xmlhttp.open("GET","getTablekanna.php?q="+str,true);
                         xmlhttp.send();
                       }         
                </script>
@@ -467,68 +488,16 @@
                <script src="js/sb-admin-datatables.min.js"></script>
                <script src="js/sb-admin-charts.min.js"></script>
             </div>
-            <div class="form-group">
-              <div class="row">
-                 <div class="col-md-2">
-                    <label for="type">Minimum Land Size:</label>
-                 </div>
-                 <div class="col-md-3">
-                    <select class="form-control">
-                       <option>min(1-10 perchaces)</option>
-                       <option>standered(10-100 perchaces)</option>
-                       <option>large(>100 perchaces)</option>
-                    </select>
-                 </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                 <div class="col-md-2">
-                    <label>Varieties:</label>
-                 </div>
-                 <div class="col-md-3">
-                    <input type="text" class="form-control" placeholder="Name">
-                 </div>
-                 <div class="col-md-2">
-                    <input type="text" class="form-control" id="usr" placeholder="Avg.Hvst.Rate">
-                 </div>
-                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="usr" placeholder="Price(per kilo)">
-                 </div>
-                 <div class="col-md-2">
-                    
-                    <button type="button" class="btn btn-info">Add Image</button>
-                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-2"></div>
-              <div class="col-md-1">
-                <button type="button" class="btn btn-success btn-sm">Add more</button>
-              </div>
-            </div>
             <br>
+                <button type="button" class="btn btn-info" style="margin-bottom: 2%;">Submit data</button>
+            <br>
+            
+
+
+
+      </div>
       </div>
     </div>
-    <style type="text/css">
-       .mapdiv{
-    width:100%;
-    margin: auto;
-}
 
-.mapdiv path {
-    fill: #036057;
-    stroke: #073833;
-    stroke-width:2px;
-    transition: fill 2.0s;
-}
-
-.mapdiv :hover {
-    fill:#16ba8b;
-}
-.mapdiv{
-   width: 50%;
-}
-    </style>
    </body>
 </html>
