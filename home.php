@@ -343,7 +343,7 @@ include("config.php");
       $farmerID =  $_SESSION['farmerID'];
       // echo "$row['farmerID']";
     }}
-  $sql = "SELECT c.name  FROM crop c,variety v,farmercrop fc,farmer f WHERE f.name = '$name' AND f.farmerID=fc.farmerID AND v.cropID=c.cropID AND fc.verityID=v.varietyID";
+  $sql = "SELECT c.nameENG FROM crop c,variety v,farmercrop fc,farmer f WHERE f.name = '$name' AND f.farmerID=fc.farmerID AND v.cropID=c.cropID AND fc.verityID=v.varietyID";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                     $sql2 = "SELECT DISTINCT fc.scheduleID,s.info, fc.dateSc  FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE fc.farmerID = '2' AND s.stepID = fc.currentStepID AND f.farmerID=fc.farmerID AND v.cropID=c.cropID";
@@ -429,7 +429,7 @@ include("config.php");
                 
               </div>
               <div class="modal-body">
-                <img src="<?php echo "sdsd" ?>" class="media-photo" style="width:100%; "> 
+                <img src="<?php echo "https://www.w3schools.com/w3css/img_lights.jpg" ?>" class="media-photo" style="width:100%; "> 
                 <p><strong><?php echo "sd" ?></strong></p>
                 <p><?php echo "sds" ?></p>
               </div>

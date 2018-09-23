@@ -284,19 +284,20 @@
             <label>
                <h2>Add new Crop</h2>
             </label>
+         <form method="post" enctype="multipart/form-data" name="formUploadFile" id="uploadForm" action="uploadVariety.php">
             <div class="form-group">
                <div class="row">
                   <div class="col-md-2">
                      <label for="usr">Name:</label>
                   </div>
                   <div class="col-md-3">
-                     <input type="text" class="form-control" id="usr" placeholder="English Name">
+                     <input type="text" class="form-control" id="usr" name="cropNameENG" placeholder="English Name">
                   </div>
                   <div class="col-md-3">
-                     <input type="text" class="form-control" id="usr" placeholder="බෝගයේ නම (සිංහලෙන්)">
+                     <input type="text" class="form-control" name="cropNameSIN" id="usr" placeholder="බෝගයේ නම (සිංහලෙන්)">
                   </div>
                   <div class="col-md-3">
-                     <input type="text" class="form-control" id="usr" placeholder="பயிர்(தமிழ்)">
+                     <input type="text" class="form-control" name="cropNameTML" id="usr" placeholder="பயிர்(தமிழ்)">
                   </div>
                </div>
             </div>
@@ -306,7 +307,7 @@
                      <label for="type">crop type:</label>
                   </div>
                   <div class="col-md-3">
-                     <select class="form-control">
+                     <select class="form-control" name="cropType">
                         <option>Vegetable</option>
                         <option>Bean</option>
                         <option>Grain</option>
@@ -466,69 +467,168 @@
                <!-- Custom scripts for this page-->
                <script src="js/sb-admin-datatables.min.js"></script>
                <script src="js/sb-admin-charts.min.js"></script>
+
             </div>
             <div class="form-group">
+               <div class="row">
+                 <div class="col-md-2">
+                    <label for="type">Add Crop Banner:</label>
+                 </div>
+                 <div class="col-md-10" style="height: 100%">
+                    <iframe src="cropPicUpload/index.php" style="border:none; height:300px; width:100%;"></iframe>
+                 </div>
+              </div>
               <div class="row">
                  <div class="col-md-2">
                     <label for="type">Minimum Land Size:</label>
                  </div>
                  <div class="col-md-3">
-                    <select class="form-control">
-                       <option>min(1-10 perchaces)</option>
-                       <option>standered(10-100 perchaces)</option>
-                       <option>large(>100 perchaces)</option>
+                    <select class="form-control" name="cropMinLandSize">
+                       <option value ="10">min(1-10 perchaces)</option>
+                       <option value ="99">standered(10-100 perchaces)</option>
+                       <option value ="100">large(>100 perchaces)</option>
                     </select>
                  </div>
               </div>
             </div>
-            <div class="form-group">
-              <div class="row">
-                 <div class="col-md-2">
-                    <label>Varieties:</label>
+            <div id="VarietiesDiv">
+               <div class="row">
+                  <div class="col-md-2"><label>Varieties:</label></div>
+               </div>
+                  
+                  <div class="form-group">
+                 <div class="row" id="varietyRow">
+                       <div class="col-md-2"></div>
+                       <div class="col-md-3">
+                          <input type="text" name="varietyName" class="form-control" placeholder="Name">
+                       </div>
+                       <div class="col-md-2">
+                          <input type="text" name="varietyAvarageHarvestRate" class="form-control" id="usr" placeholder="Avg.Hvst.Rate">
+                       </div>
+                       <div class="col-md-3">
+                          <input type="text"  name="varietyPrice" class="form-control" id="usr" placeholder="Price(per kilo)">
+                       </div>
+                       <div class="col-md-2">   
+                      
+                           <input type="file" id="exampleInputFile" name="files[]" multiple="single">
+                     
+                       <button type="submit" class="btn btn-info" name="btnSubmit" >Add Variety</button>
+                       </div>
                  </div>
-                 <div class="col-md-3">
-                    <input type="text" class="form-control" placeholder="Name">
-                 </div>
-                 <div class="col-md-2">
-                    <input type="text" class="form-control" id="usr" placeholder="Avg.Hvst.Rate">
-                 </div>
-                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="usr" placeholder="Price(per kilo)">
-                 </div>
-                 <div class="col-md-2">
-                    
-                    <button type="button" class="btn btn-info">Add Image</button>
-                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-2"></div>
-              <div class="col-md-1">
-                <button type="button" class="btn btn-success btn-sm">Add more</button>
               </div>
             </div>
             <br>
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-3">
+                <button type="button" id="MoreBtn" class="btn btn-success btn-sm" onclick="javascript: addVariety();">Add more</button>
+                <br><br>
+              </div>
+            </div>
+         </form>
+         </div>     
       </div>
     </div>
+    <script>
+      function addVariety(){
+
+         var varietyRow = document.getElementById('VarietiesDiv');
+      if (varietyRow)
+      {
+            var form = document.createElement('form');       
+            var rowDiv = document.createElement('div');
+            var Div0 = document.createElement('div');
+            var Div1 = document.createElement('div');
+            var Div2 = document.createElement('div');
+            var Div3 = document.createElement('div');
+            var lineBreak = document.createElement('br');
+
+            var Div4 = document.createElement('div');
+
+            var VarietyName = document.createElement('input');
+            var VarietyAvarageHarvestRate = document.createElement('input');
+            var VarietyPrice = document.createElement('input');
+            var VarietyButton = document.createElement('button');
+            
+            
+            rowDiv.name = 'row';
+            rowDiv.className = 'row';
+
+            Div0.className = 'col-md-2';
+            Div1.className = 'col-md-3';
+            Div2.className = 'col-md-2';
+            Div3.className = 'col-md-3';
+            Div4.className = 'col-md-2';
+
+            VarietyName.type = 'text';
+            VarietyName.placeholder = 'Name';
+            VarietyName.className = 'form-control';
+            //VarietyName.className = 'col-md-3';
+
+            VarietyAvarageHarvestRate.type = 'text';
+            VarietyAvarageHarvestRate.placeholder = 'Avg.Hvst.Rate';
+            VarietyAvarageHarvestRate.className = 'form-control';
+     //       VarietyName.className = 'col-md-3';
+            
+            VarietyPrice.type = 'text';
+            VarietyPrice.placeholder = 'Price(per kilo)';
+            VarietyPrice.className = 'form-control';
+
+            VarietyButton.className = 'btn btn-info';
+            VarietyButton.innerHTML = 'Add Image';
+            
+//VarietyButton.setAttribute('value','Add Image');
+            
+
+
+          //  VarietyName.className = 'col-md-3';
+           
+            if (VarietyName)   
+            {
+                // Add the new elements to the form
+                varietyRow.appendChild(lineBreak);
+                varietyRow.appendChild(form)
+                form.appendChild(rowDiv);
+                rowDiv.appendChild(Div0);
+                rowDiv.appendChild(Div1);
+                  Div1.appendChild(VarietyName);
+                rowDiv.appendChild(Div2);
+                  Div2.appendChild(VarietyAvarageHarvestRate);
+                rowDiv.appendChild(Div3);
+                  Div3.appendChild(VarietyPrice);
+                rowDiv.appendChild(Div4);
+                  Div4.appendChild(VarietyButton);
+                
+                
+                
+                // Increment the count
+            }
+        else   
+        {
+            alert('Question limit reached');
+        }
+    }
+
+      }
+    </script>
+
     <style type="text/css">
-       .mapdiv{
-    width:100%;
-    margin: auto;
-}
-
-.mapdiv path {
-    fill: #036057;
-    stroke: #073833;
-    stroke-width:2px;
-    transition: fill 2.0s;
-}
-
-.mapdiv :hover {
-    fill:#16ba8b;
-}
-.mapdiv{
-   width: 50%;
-}
+                      .mapdiv{
+                   width:100%;
+                   margin: auto;
+               }
+               .mapdiv path {
+                   fill: #036057;
+                   stroke: #073833;
+                   stroke-width:2px;
+                   transition: fill 2.0s;
+               }
+               .mapdiv :hover {
+                   fill:#16ba8b;
+               }
+               .mapdiv{
+                  width: 50%;
+               }
     </style>
    </body>
 </html>

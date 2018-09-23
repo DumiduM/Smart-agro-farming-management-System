@@ -27,10 +27,10 @@ switch($_REQUEST['action']){
 
 
 
-	$query = $db->prepare("SELECT * FROM messages where user=? or user = 'admin'");	
+	$query = $db->prepare("SELECT * FROM messages where user=? or user = ?");	
 		//$query = $db->prepare("SELECT id,message,date FROM messages");
 
-	$run = $query->execute([$_SESSION['login_user']]);
+	$run = $query->execute([$_SESSION['login_user']],[$_SESSION['login_user']]+"_admin");
 
 	$rs = $query->fetchAll(PDO::FETCH_OBJ);
 

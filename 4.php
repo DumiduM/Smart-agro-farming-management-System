@@ -378,13 +378,15 @@ function custom_echo($x, $length)
 if(isset($_POST['save'])){
 
     
-      // $farmerID = $_SESSION['farmerID'];
+      $farmerID = $_SESSION['farmerID'];
 
     $sql = "INSERT INTO farmercrop (farmerID,verityID,CurrentStepID,dateSc) VALUES ('$farmerID','$varietyID','1','$date')";
 
        if ($conn->query($sql) === TRUE) {
               //echo "<script type='text/javascript'>alert('SQL DONE');</script>";
-         mysqli_close($conn);echo "string";
+         mysqli_close($conn);
+         ?><script>gotoHome();</script><?php
+
 
       }
       else {
@@ -394,7 +396,8 @@ if(isset($_POST['save'])){
 }
 ?>
 <script>
-function myFunction() {
+function gotoHome() {
+	alert("done");
     window.open("home.php");
     this.exit;
 }

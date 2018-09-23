@@ -9,7 +9,7 @@ if (!$conn) {
     die('Could not connect: ' . mysqli_error($conn));
 }
 
-    $sql = "SELECT varietyID,varietyName,harvestRate,varietyPic,price,name FROM variety,crop WHERE variety.cropID LIKE '$q' AND crop.cropID = variety.cropID";
+    $sql = "SELECT varietyID,varietyName,harvestRate,varietyPic,price,nameENG FROM variety,crop WHERE variety.cropID LIKE '$q' AND crop.cropID = variety.cropID";
                   $result = $conn->query($sql);
                   if ($result->num_rows > 0) {
                         // output data of each row
@@ -18,7 +18,7 @@ if (!$conn) {
                             // echo "<br>". "Name: " . $row["varietyName"]. "<br>" . " harvestRate: ".$row["harvestRate"]."%"."<br>"."Current Price: ". $row["price"]. "<br>";
                             $variety_Path = $row["varietyPic"];
                             $varietyID = $row["varietyID"];
-                            $name = $row["name"];
+                            $name = $row["nameENG"];
                             $_SESSION['cropName']="$name";
         
         ?>

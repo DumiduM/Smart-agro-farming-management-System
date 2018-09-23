@@ -136,7 +136,7 @@ echo "<script type='text/javascript'>alert('check');</script>";
 				</div>
 				<div class="col-sm-2">
 					 <div class="form-group">
-					    <input type="submit" name ="login" value="login" class="btn-header-login" required>
+					    <button type="submit" name ="login" value="login" class="btn btn-primary" required>Login</button>
 					  </div>
 				</div>
             </form>
