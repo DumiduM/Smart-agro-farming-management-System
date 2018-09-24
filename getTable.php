@@ -18,11 +18,10 @@ $q = $_GET['q'];
   <meta name="author" content="">
   <title>SB Admin - Start Bootstrap Template</title>
   <!-- Bootstrap core CSS-->
-  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
-  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+ 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
   <link href="liststyle.css" rel="stylesheet">
@@ -31,7 +30,8 @@ $q = $_GET['q'];
 <body>
 
 <div class="container">
-  <div>
+  <form class="form-inline">
+<div>
   <h2><?php echo "$q"; ?></h2>
   <table class="table table-striped">
     <thead>
@@ -44,27 +44,25 @@ $q = $_GET['q'];
         <td>Upland</td>
         <td>Lowland</td>
       </tr>
-      <tr>
         <td>
-        <select class="form-control">
-          <option>Group I</option>
-          <option>Group II</option>
-          <option>Group III</option>
+        <select class="form-control" id="yalaUp<?php echo "$q"; ?>">
+          <option value='1'>Group I</option>
+          <option value='2'>Group II</option>
+          <option value='3'>Group III</option>
         </select>
         </td>
         <td>
-        <select class="form-control">
-          <option>Group I</option>
-          <option>Group II</option>
-          <option>Group III</option>
+        <select class="form-control" id="yalaDown<?php echo "$q"; ?>">
+          <option value='1'>Group I</option>
+          <option value='2'>Group II</option>
+          <option value='3'>Group III</option>
         </select>
         </td>
     </tbody>
   </table>
 </div>
 
-<div class="container">
-  <div>
+<div>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -76,23 +74,25 @@ $q = $_GET['q'];
         <td>Upland</td>
         <td>Lowland</td>
       </tr>
-      <tr>
         <td>
-        <select class="form-control">
-          <option>Group I</option>
-          <option>Group II</option>
-          <option>Group III</option>
+        <select class="form-control" id="mahaUp<?php echo "$q"; ?>">
+          <option value='1'>Group I</option>
+          <option value='2'>Group II</option>
+          <option value='3'>Group III</option>
         </select>
         </td>
         <td>
-        <select class="form-control">
-          <option>Group I</option>
-          <option>Group II</option>
-          <option>Group III</option>
+        <select class="form-control" id="mahaDown<?php echo "$q"; ?>">
+          <option value='1'>Group I</option>
+          <option value='2'>Group II</option>
+          <option value='3'>Group III</option>
         </select>
         </td>
     </tbody>
   </table>
+  <button class="saveKanna btn btn-success" value="<?php echo "$q";?>">Save</button>
+</div>
+</form>
 </div>
 
 </body>
