@@ -1,10 +1,10 @@
 <?php
-	include('conn.php');
+	include('config.php');
 	if(isset($_POST['edit'])){
 		$id=$_POST['id'];
-		$firstname=$_POST['firstname'];
-		$lastname=$_POST['lastname'];
+		$harvest=$_POST['harvest'];
+		$price=$_POST['price'];
 		
-		mysqli_query($conn,"update `user` set firstname='$firstname', lastname='$lastname' where userid='$id'");
+		mysqli_query($conn,"update `harvest` set amount='$harvest', price='$price' where harvestID='$id'");
 	}
 ?>

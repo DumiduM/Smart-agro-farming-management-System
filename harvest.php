@@ -32,6 +32,8 @@ if ($result2->num_rows > 0) {
 
 <head>
 
+<meta charset = "UTF-8" />
+        <link rel = "stylesheet" type = "text/css" href = "css/bootstrap.min.css" />
     <div class="container">
         <a href="https://www.accuweather.com/en/lk/nuwara-eliya/307308/weather-forecast/307308" class="aw-widget-legal">
 
@@ -335,7 +337,7 @@ if ($result2->num_rows > 0) {
                                 <select class="form-control" id="scheduleID">
                                 
                                 <?php
-                                  $getSchedule = "SELECT scheduleID,varietyName,dateSc from farmercrop,variety WHERE farmerID LIKE '$farmerID' AND harvested LIKE '0' OR harvested LIKE null AND farmercrop.verityID = variety.varietyID";
+                                  $getSchedule = "SELECT scheduleID,varietyName,dateSc from farmercrop,variety WHERE farmerID LIKE '$farmerID' AND harvested LIKE '0' AND farmercrop.verityID = variety.varietyID";
                                   $result      = $conn->query($getSchedule);
                                   
                                   if ($result->num_rows > 0)
@@ -408,7 +410,7 @@ if ($result2->num_rows > 0) {
                                 }
                                
                             });
-                            alert($scheduleID);
+                            alert("Congratulations !!! You have Earned Rs."+$harvest*$price+" using E-Farmer.Keep up the Good Work. Happy Cultivating.");
                         }
                     });
                     //Delete
@@ -427,13 +429,14 @@ if ($result2->num_rows > 0) {
                         });
                     });
                     //Update
-                    $(document).on('click', '.updateuser', function() {
+                    $(document).on('click', '.updateHarvest', function() {
                         $uid = $(this).val();
                         $('#edit' + $uid).modal('hide');
                         $('body').removeClass('modal-open');
                         $('.modal-backdrop').remove();
-                        $uharvest = $('#uharvest' + $uid).val();
+                        $uharvest = $('#uamount' + $uid).val();
                         $uprice = $('#uprice' + $uid).val();
+                        alert("Congratulations !!! You have Earned Rs."+$uharvest*$uprice+" using E-Farmer.Keep up the Good Work. Happy Cultivating.");
                         $.ajax({
                             type: "POST",
                             url: "update.php",
