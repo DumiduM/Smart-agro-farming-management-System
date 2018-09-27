@@ -4,8 +4,9 @@
 		$scheduleID = $_POST['scheduleID'];
 		$harvest=$_POST['harvest'];
 		$price=$_POST['price'];
+		$date=$_POST['date'];
 		
-		mysqli_query($conn,"insert into `harvest` (amount, price,scheduleID) values ('$harvest', '$price','$scheduleID')");
+		mysqli_query($conn,"insert into `harvest` (amount, price,scheduleID,harvestedDate) values ('$harvest', '$price','$scheduleID','$date')");
 
 		mysqli_query($conn,"update `farmercrop` set harvested='1' where scheduleID='$scheduleID'");
 	}

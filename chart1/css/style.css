@@ -1,0 +1,391 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+.logo i {
+	font-size: 31px;
+	margin-right: 4px;
+	word-spacing: 14px;
+}
+.logo{
+	color: white;
+	margin: 0;
+	font-size: 20px;
+	padding: 4px 0;
+	padding-bottom: 15px;
+
+}
+.login-bottom-text{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-size: 12px;
+	color: white;
+	line-height: 19px;
+}
+
+.btn-header-login{
+color: black;
+	color: #fff;
+    background-color: #0a1f35;
+    border-color: #005cbf;
+}
+
+.btn-primary{
+	color: #fff;
+    background-color: #0a1f35;
+    border-color: #005cbf;
+}
+
+.form-group{
+	color: #515151;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.site{
+	max-height: 10px;
+	max-width: 1px;
+}
+
+header{
+	background: #13CE68;
+	padding-top: 20px;
+}
+header .form-group{
+	margin-bottom: 0px;
+}
+header .btn-header-login{
+	margin-bottom: 15px;	
+}
+.login-main{
+	margin-top: 130px;
+}
+.multibox{
+	padding-left: 0px;
+	padding-bottom: 10px;
+}
+.login-main span{
+	font-size: 12px;
+} 
+
+
+
+footer hr{
+	margin-top: 0px;
+	padding-top: 0px;
+}
+.footer-options ul{
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+.footer-options ul li{
+	float:left;
+	list-style: none;
+	padding: 5px;
+	font-size: 12px;
+}
+.footer-options ul li a{
+	text-decoration: none;
+	color: #000;
+}
+.copyrights{
+	margin-top: 25px;
+}
+img.background{
+	filter: blur(50px);
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 20%;
+   
+    background-image: url("img/tile1.jpg");
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+
+
+
+
+
+
+/*=============================================================================================>maleeesha*/
+
+
+
+
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+body{
+	background-image: url(pic1.jpg);
+}
+
+h1{
+	/*font-family: Monotype Corsiva;
+	font-size: 48px;*/
+}
+
+#wrapper{
+	width: 1000px;
+	height: 838px;
+	margin: 10px auto;
+	background: #f1f1f1; 
+	padding: 20px;
+}
+
+.chat_wrapper{
+	width: 70%;
+	margin: 10px auto;
+	background: #ffffff;
+}
+
+#chat{
+	min-height: 600px;
+	height: 600px;
+	overflow: auto;
+	border: 1px solid #b3b3b3;
+	padding: 10px;
+	/*font-family: Bookman Old Style;
+	font-size: 20px;*/
+}
+
+.textarea{
+	width: 97%;
+	border: 1px solid#b3b3b3;
+	outline: none;
+	padding: 10px;
+	margin-top: 10px;
+	/*font-family: Bookman Old Style;
+	font-size: 20px;*/
+}
+
+.single-message{
+	padding: 5px 5px 5px 5px;
+	border-bottom: 1px solid #b3b3b3;
+	
+}
+
+.single-message span{
+	float: right; 
+}
+
+/*second edit begin*/
+.navbar{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #23282e;
+/*  font-family: verdana;
+  font-size: 20px;*/
+  font-weight: 200;
+}
+
+.navbttn{
+  float: right;
+}
+
+.navbttn a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbttn a:hover {
+  background-color: #4f5b69;
+}
+/*2nd edit end*/
+
+/*1st edit begin */
+.nav-side-menu {
+  overflow: auto;
+/*  font-family: verdana;
+  font-size: 20px;*/
+  font-weight: 200;
+  background-color: #2e353d;
+  position: fixed;
+  top: 0px;
+  width: 430px;
+  height: 100%;
+  color: #e1ffff;
+}
+.Logo {
+  background-color: #23282e;
+  height: 200px;
+  width: 200px;
+  padding-left: 110px;
+  margin-top: 10px;
+  padding-top: 10px;
+
+}
+.Logo1{
+	background-color: #23282e;
+	margin: 0 auto;
+}
+
+.nav-side-menu .brand {
+  background-color: #23282e;
+  line-height: 50px;
+  display: block;
+  text-align: center;
+  font-size: 50px;
+  height: 2%;
+}
+
+.nav-side-menu .toggle-btn {
+  display: none;
+}
+.nav-side-menu ul,
+.nav-side-menu li {
+  list-style: none;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin: 0px;
+  line-height: 35px;
+  cursor: pointer;
+  
+}
+.nav-side-menu ul :not(collapsed) .arrow:before,
+.nav-side-menu li :not(collapsed) .arrow:before {
+/*  font-family: FontAwesome;*/
+  content: "\f078";
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+  float: right;
+}
+.nav-side-menu ul .active,
+.nav-side-menu li .active {
+  border-left: 3px solid #d19b3d;
+  background-color: #4f5b69;
+}
+.nav-side-menu ul .sub-menu li.active,
+.nav-side-menu li .sub-menu li.active {
+  color: #d19b3d;
+}
+.nav-side-menu ul .sub-menu li.active a,
+.nav-side-menu li .sub-menu li.active a {
+  color: #d19b3d;
+}
+.nav-side-menu ul .sub-menu li,
+.nav-side-menu li .sub-menu li {
+  background-color: #181c20;
+  border: none;
+  line-height: 28px;
+  border-bottom: 1px solid #23282e;
+  margin-left: 0px;
+}
+.nav-side-menu ul .sub-menu li:hover,
+.nav-side-menu li .sub-menu li:hover {
+  background-color: #020203;
+}
+.nav-side-menu ul .sub-menu li:before,
+.nav-side-menu li .sub-menu li:before {
+  /*font-family: FontAwesome;*/
+  content: "\f105";
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+}
+.nav-side-menu li {
+  padding-left: 0px;
+  border-left: 3px solid #2e353d;
+  border-bottom: 1px solid #23282e;
+}
+
+.nav-side-menu li a {
+  text-decoration: none;
+  color: #e1ffff;
+}
+.nav-side-menu li a i {
+  padding-left: 10px;
+  width: 20px;
+  padding-right: 20px;
+}
+.nav-side-menu li:hover {
+  border-left: 3px solid #d19b3d;
+  background-color: #4f5b69;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+#exit {
+ background-color: #23282e;
+ text-align: center;
+ margin-top: 390px;
+ padding-bottom: 10px;
+ padding-top: 10px;
+}
+
+
+
+#mainpage{
+	background-color: #23282e;
+}
+
+
+@media (max-width: 767px) {
+  .nav-side-menu {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .nav-side-menu .toggle-btn {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10 !important;
+    padding: 3px;
+    background-color: #ffffff;
+    color: #000;
+    width: 40px;
+    text-align: center;
+  }
+  .brand {
+    text-align: left !important;
+    font-size: 22px;
+    padding-left: 20px;
+    line-height: 50px !important;
+  }
+}
+@media (min-width: 767px) {
+  .nav-side-menu .menu-list .menu-content {
+    display: block;
+  }
+  #main {
+  	width:calc(100% - 300px);
+  	float: right;
+  }
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+/*1st edit End*/

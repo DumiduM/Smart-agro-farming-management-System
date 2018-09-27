@@ -3,7 +3,7 @@
 	include 'config.php';
    if(isset($_POST['login'])){
 
-echo "<script type='text/javascript'>alert('check');</script>";
+// echo "<script type='text/javascript'>alert('check');</script>";
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // username and password sent from form 
       $myusername = mysqli_real_escape_string($conn,$_POST['uname']);
@@ -87,6 +87,8 @@ echo "<script type='text/javascript'>alert('check');</script>";
 
 <html>
   <head>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -180,10 +182,28 @@ echo "<script type='text/javascript'>alert('check');</script>";
 					  <input type="text" name="farmerName" required class="form-control" placeholder="Name">
 					</div>
 
-					<div class="form-group">
+					<!-- <div class="form-group">
 					  <label class="control-label" for=""></label>
 					  <input type="text" name="farmerAgriDiv" required class="form-control" placeholder="Agriculture Division">
-					</div>
+					</div> -->
+
+					<div class="form-group">
+	                    <select class="form-control" name="farmerAgriDiv" placeholder="Select Division">
+	                    
+	                    <?php
+	                      $getDivision = "SELECT divName from divisionname order by ID";
+	                      $result      = $conn->query($getDivision);
+	                      
+	                      if ($result->num_rows > 0)
+	                      {
+	                        while ($row = $result->fetch_assoc())
+	                        {
+	                          echo "<option value='".$row['divName']."'>".$row['divName']."</option>";
+	                        }
+	                      }                               
+	                    ?>
+	                    </select>
+                    </div>
 
 					<div class="form-group">
 					  <label class="control-label" for=""></label>

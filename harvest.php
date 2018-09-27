@@ -353,7 +353,7 @@ if ($result2->num_rows > 0) {
 
 
                             <div>
-                                <form class="form-inline">
+                                <form >
                                     <div class="form-group">
                                         <label>Harvest (in Kilos):</label>
                                         <input type="text" id="harvest" class="form-control">
@@ -362,6 +362,10 @@ if ($result2->num_rows > 0) {
                                         <label>selling price: (Rs. per Kilo)</label>
                                         <input type="text" id="price" class="form-control">
                                     </div>
+                                    <div class="form-group">
+                                        <label>Harvested Date:</label>
+                            			<input type="date" name="date" id="date" class="controls" >
+                            		</div>
                                     <div class="form-group">
                                         <button type="button" id="addnew" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add</button>
                                     </div>
@@ -374,7 +378,6 @@ if ($result2->num_rows > 0) {
                     </div>
                 </div>
             </div>
-
 
 
 
@@ -395,6 +398,8 @@ if ($result2->num_rows > 0) {
                             $scheduleID = $('#scheduleID').val();
                             $harvest = $('#harvest').val();
                             $price = $('#price').val();
+                            $date = $('#date').val();
+                            
                             $.ajax({
                                 type: "POST",
                                 url: "addnew.php",
@@ -402,15 +407,18 @@ if ($result2->num_rows > 0) {
                                     scheduleID : $scheduleID,
                                     harvest: $harvest,
                                     price: $price,
+                                    date : $date,
                                     add: 1,
                                 },
                                 success: function() {
                                   // alert('done');
+                                  alert($date);
                                     showHarvest();
                                 }
                                
                             });
-                            alert("Congratulations !!! You have Earned Rs."+$harvest*$price+" using E-Farmer.Keep up the Good Work. Happy Cultivating.");
+                            
+                            //alert("Congratulations !!! You have Earned Rs."+$harvest*$price+" using E-Farmer.Keep up the Good Work. Happy Cultivating.");
                         }
                     });
                     //Delete

@@ -1,0 +1,73 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+
+
+#wrapper{
+	width: 1000px;
+	height: 838px;
+	margin: 10px auto;
+	background: #f1f1f1; 
+	padding: 20px;
+}
+
+.chat_wrapper{
+	width: 70%;
+	margin: 10px auto;
+	background: #ffffff;
+}
+
+#chat{
+	min-height: 600px;
+	height: 600px;
+	overflow: auto;
+	border: 1px solid #b3b3b3;
+	padding: 10px;
+	font-family: Bookman Old Style;
+	font-size: 20px;
+}
+
+.textarea{
+	width: 97%;
+	border: 1px solid#b3b3b3;
+	outline: none;
+	padding: 10px;
+	margin-top: 10px;
+	font-family: Bookman Old Style;
+	font-size: 20px;
+}
+
+.single-message{
+	padding: 5px 5px 5px 5px;
+	border-bottom: 1px solid #b3b3b3;
+	
+}
+
+.single-message span{
+	float: right; 
+}
+
+
+
+#exit {
+ background-color: #23282e;
+ text-align: center;
+ margin-top: 390px;
+ padding-bottom: 10px;
+ padding-top: 10px;
+}
+
+
+
+#mainpage{
+	background-color: #23282e;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+/*1st edit End*/

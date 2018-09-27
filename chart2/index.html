@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChartJS</title>
+</head>
+<body>
+    
+    <canvas id="chartcanvas"></canvas>
+
+    <!-- javascript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/Chart.min.js"></script>
+
+    <script type="text/javascript">
+    
+    var ctx = $("#chartcanvas");
+
+    var chart = new Chart(ctx, {
+    	type : "line",
+    	data : {},
+    	options: {}
+    });
+    
+    </script>
+</body>
+</html>

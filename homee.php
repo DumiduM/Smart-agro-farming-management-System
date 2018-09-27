@@ -7,47 +7,10 @@
   }
   else{
     $name = $_SESSION['login_user'];
-    $farmerID = $_SESSION['farmerID'];
     // echo "<script type='text/javascript'>alert('$name');</script>";
   }
 
-                                          include("config.php");
-                                          //$farmerID = "";
-                                          $NIC = "";
-                                          $fname = "";
-                                          $lname = "";
-                                          $mobile = "";
-                                          $email = "";
-                                         
-                                          $farmerPic = "";
-                                          $password = "";
-                                          $agriDiv = "";
-
-  $sql = "SELECT farmerID,NIC,email,lname,name,mobile,farmerPic,password,agriDiv FROM farmer WHERE farmerID LIKE '$farmerID'";
-                                $result = $conn->query($sql);
-
-                                 if ($result->num_rows > 0) {
-                                      // output data of each row
-                                  $row=".";
-                                      while($row = $result->fetch_assoc()) {
-                                          // echo "<br>". "district: " . $row["district"]. "<br>" . " yalaStart: " . $row["yalaStart"]. "<br>". " yalaEnd: " . $row["yalaEnd"]. "<br>".  " mahaStart: " . $row["mahaStart"]."<br>". " mahaEnd: " . $row["mahaEnd"]. "<br>";
-                                          $farmerID = $row["farmerID"];
-                                          $NIC = $row["NIC"];
-                                          $fname = $row["name"];
-                                          $lname = $row["lname"];
-                                          $mobile = $row["mobile"];
-                                          $email = $row["email"];
-                                          $farmerID = $row["farmerID"];
-                                          $farmerPic = $row["farmerPic"];
-                                          $password = $row["password"];
-                                          $agriDiv = $row["agriDiv"];
-
-                                      }
-                                  } else {
-                                      echo "0 results";
-                                  }
-
-
+  $Schedule_check="0";  
 ?>
 
 
@@ -56,7 +19,62 @@
 <html lang="en">
 
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <div class="container">
+
+<a href="https://www.accuweather.com/en/lk/colombo/311399/weather-forecast/311399" class="aw-widget-legal">
+<!--
+By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at https://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at https://www.accuweather.com/en/privacy.
+-->
+</a><div id="awcc1538039911359" class="aw-widget-current"  data-locationkey="311399" data-unit="c" data-language="en-us" data-useip="true" data-uid="awcc1538039911359"></div><script type="text/javascript" src="https://oap.accuweather.com/launch.js"></script>
+
+    
+<!-- <a href="https://www.accuweather.com/en/lk/nuwara-eliya/307308/weather-forecast/307308" class="aw-widget-legal">
+
+</a><div id="awcc1528797381923" class="aw-widget-current"  data-locationkey="307308" data-unit="c" data-language="en-us" data-useip="false" data-uid="awcc1528797381923"></div><script type="text/javascript" src="https://oap.accuweather.com/launch.js"></script><br><br> -->
+
+<script type="text/javascript" src="accW.js"></script>
+<style>
+
+
+div.aw-widget-current-inner a.aw-toggle {
+    -webkit-border-radius: 0 0 4px 4px!important;
+    -moz-border-radius: 0 0 4px 4px!important;
+    border-radius: 0 0 4px 4px!important;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.15)!important;
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.15)!important;
+    box-shadow: 0 1px 1px rgba(0,0,0,.15)!important;
+    position: absolute!important;
+    z-index: 10!important;
+    width: 26px!important;
+    height: 16px!important;
+    background: #e9e9e9!important;
+    bottom: 0!important; 
+    right: 10px!important; 
+    border: 1px solid #dcdcdc!important;
+    display: none!important;
+}
+
+.container {
+    width: 100%;
+     padding-right: 15px; 
+     padding-left: 15px; 
+     margin-right: auto; 
+    margin-left: auto;
+
+
+       width:100%;
+    height:100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+.bg-dark {
+    background-color: #343a40!important;
+}
+</style>
+
+</div>
+
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -79,24 +97,35 @@
   
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+
+
+
     <img src="img/logo.png"  class="logo1"alt="Homepage">
-    <a class="navbar-brand" id="navbar-brand" href="index.html">E-Farmer</a>
+    <a class="navbar-brand" id="navbar-brand" href="profile.php">E-Farmer</a>
     <style>img.logo1{
 	height: 50px;
 }</style>
+
+
+
+
+
+
+
+
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="home.php">
+          <a class="nav-link">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link" href="weather.php">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Weather</span>
           </a>
@@ -187,7 +216,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-envelope"></i>
             <span class="d-lg-none">Messages
@@ -220,7 +249,7 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item small" href="#">View all messages</a>
           </div>
-        </li>
+        </li> -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-bell"></i>
@@ -283,261 +312,167 @@
       </ul>
     </div>
   </nav>
-  <div class="content-wrapper">
+  <div class="content-wrapper" id="bodyhome">
     <div class="container-fluid">
-<!-- ==================================================================================================================================================================== -->
-
-<div class="container-fluid">
-    <h1>Edit Profile</h1>
-    <hr>
-  <div class="row">
-      <!-- left column -->
-      <div class="col-md-3">
-        <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-          <style>
-            .img-circle {
-    border-radius: 50%;
+      <div class="row">
+<br>
+<style>
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 20%;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    background-image: url("img/tile1.jpg");
 }
-          </style>
-          <h6><br>Upload a different photo...<br></h6>
-          
-          <input type="file" class="form-control" >
-        </div>
-      </div>
-      
-      <!-- edit form column -->
-      <div class="col-md-9 personal-info">
-        <div class="alert alert-info alert-dismissable">
-                                          <!-- $NIC = $row["NIC"];
-                                          $fname = $row["name"];
-                                          $mobile = $row["mobile"];
-                                          $farmerID = $row["farmerID"];
-                                          $farmerPic = $row["farmerPic"];
-                                          $password = $row["password"];
-                                          $agriDiv = $row["agriDiv"]; -->
-          <a class="panel-close close" data-dismiss="alert">×</a> 
-          <i class="fa fa-coffee"></i>
-          Please make sure to add <strong> accurate </strong>data.
-        </div>
-        <h3>Personal info</h3>
-        
-        <form class="form-horizontal" role="form" >
-          <div class="form-group">
-            <label class="col-lg-3 control-label">First name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" id="fname" name="fname" type="text" value="<?php echo"$fname" ?>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">Last name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" id="lname" name="lname" type="text" value="<?php echo"$lname" ?>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">NIC:</label>
-            <div class="col-lg-8">
-              <input class="form-control" id="NIC" name="NIC" type="text" value="<?php echo"$NIC" ?>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">mobile:</label>
-            <div class="col-lg-8">
-              <input class="form-control" id="mobile" name="mobile" type="text" value="<?php echo"$mobile" ?>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">Email:</label>
-            <div class="col-lg-8">
-              <input class="form-control" id="email" name="email" type="text" value="<?php echo"$email" ?>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">Agriculture Divition:</label>
-            <div class="col-lg-8">
-              <div class="ui-select">
-               
-                      <select class="form-control" id="ag_div" name="ag_div" placeholder="Select Division">
-                      
-                      <?php
-                        $getDivision = "SELECT divName from divisionname order by ID";
-                        $result      = $conn->query($getDivision);
-                        
-                        if ($result->num_rows > 0)
-                        {
-                          while ($row = $result->fetch_assoc())
-                          {
-                            echo "<option value='".$row['divName']."'>".$row['divName']."</option>";
-                          }
-                        }                               
-                      ?>
 
-                    </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Username:</label>
-            <div class="col-md-8">
-              <input class="form-control" name="uname" type="text" value="<?php echo"$name" ?>" disabled>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Password:</label>
-            <div class="col-md-8">
-              <input class="form-control" id="ps1" name="ps1" type="password" value="">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Confirm password:</label>
-            <div class="col-md-8">
-              <input class="form-control" id="ps2" name="ps2" type="password" value="">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label"></label>
-            <div class="col-md-8">
-              <div class = "form-group">
-                <button type = "button" class = "updateuser btn btn-primary"><span class = "glyphicon glyphicon-plus"></span>Save Changes</button>
-                <input type="reset" class="btn btn-default" value="Cancel">
-              </div>
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
 
+.container {
+    padding: 2px 16px;
+}
+#bodyhome{
+  background-image: "img/bg1.jpg";
+}
 
-              <!-- <input type="submit" class="btn btn-primary"  name="modify" value="Save Changes" action ="">
-              <span></span> -->
-              
-            </div>
-          </div>
-        </form>
-      </div>
-  </div>
-</div>
-<hr>
-</div>
-</div>
+</style>
 
-
-<script type = "text/javascript">
-  $(document).ready(function(){
-    
-    //Update
-    $(document).on('click', '.updateuser', function(){
-
-      $farmerID = <?php echo $farmerID; ?>;
-      $fname=$('#fname').val();
-      $lname=$('#lname').val();
-      $NIC=$('#NIC').val();
-      $mobile=$('#mobile').val();
-      $email=$('#email').val();
-      $ag_div=$('#ag_div').val();
-      $ps1=$('#ps1').val();
-      $ps2=$('#ps2').val();
-      
-      if($ps1 == null & $ps2 ==null)
-      {
-        $.ajax({
-          type: "POST",
-          url: "update_profile.php",
-          data: {
-            farmerID : $farmerID,
-            fname : $fname,
-            lname : $lname,
-            NIC : $NIC,
-        		mobile : $mobile,
-        		email : $email,
-        		ag_div : $ag_div,
-            edit: 1,
-          },
-          success: function(){
-            alert("Updated Succesfully!");
-          }
-        });
-      }
-
-      else if($ps1 == $ps2)
-      {
-        $.ajax({
-          type: "POST",
-          url: "update_profile.php",
-          data: {
-            farmerID : $farmerID,
-            fname : $fname,
-            lname : $lname,
-            NIC : $NIC,
-            mobile : $mobile,
-            email : $email,
-            ag_div : $ag_div,
-            ps : $ps1,
-            edit: 2,
-          },
-          success: function(){
-            alert("Updated Succesfully!");
-          }
-        });
-      }
-      else if($ps1 == null & $ps2 != null)
-      {
-        alert("Please fill both password fields!!!");
-      }
-      else if($ps1 != null & $ps2 == null)
-      {
-        alert("Please fill both password fields!!!");
-      }
-      else
-      {
-        alert("Password Combination Wrong. Please Retry!!!");
-      }
-    });
-  
-  });
- 
-  
-</script>
 
 <?php
+include("config.php");
+  $getuserID_SQL = "SELECT farmerID from farmer WHERE name LIKE '$name'";
+    $result2 = $conn->query($getuserID_SQL);
+    if ($result2->num_rows > 0) {;
+      // 
+    while($row = $result2->fetch_assoc()) {
+      $_SESSION['farmerID'] =  $row["farmerID"];
+      $farmerID =  $_SESSION['farmerID'];
+      // echo "$row['farmerID']";
+    }}
+  $sql = "SELECT c.nameENG FROM crop c,variety v,farmercrop fc,farmer f WHERE f.name = '$name' AND f.farmerID=fc.farmerID AND v.cropID=c.cropID AND fc.verityID=v.varietyID";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                    $sql2 = "SELECT DISTINCT fc.scheduleID,s.info, fc.dateSc  FROM crop c,steps s,variety v,farmercrop fc,farmer f WHERE fc.farmerID = '2' AND s.stepID = fc.currentStepID AND f.farmerID=fc.farmerID AND v.cropID=c.cropID";
+                    $result2 = $conn->query($sql2);
+                    if ($result2->num_rows > 0) {
+                          while($row = $result2->fetch_assoc()) {
+                            $result_array[]=$row;
+                            ?><br><?php
+                            
+                        }
+                        foreach($result_array as $key=>$value){
+                            ?>
+                            <!-- home.php?code=<?php echo $result_array[$key]["scheduleID"]; ?> -->
+                                <div class="card">
+                                  <form method="POST" action="">
+                                <input type="image" src="img/tile2.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
+                                <div class="centered"><h2><?php echo $result_array[$key]["info"]; ?></h2>
+                                  <label class="info"><h6><?php echo $result_array[$key]["dateSc"]; ?></h6></label>
+                                  <button type="submit" class="btn btn-primary" name="done" value="done" data-toggle="modal" data-target="#myModal">  Done   </button>
+                                  <button type="submit" class="btn btn-warning"  name="details" onsubmit="event.preventDefault();"> More Details </button>
+                                  <input type="hidden" name="key" value="<?php echo $result_array[$key]["scheduleID"]; ?>">
+                                  <style type="text/css">
+                                    .btn{
+                                      border-radius: 26px;
+                                      color: white;
+                                    }
+                                  </style>
 
-//   if(isset($_POST['modify'])){
-// echo "<script type='text/javascript'>alert('SQL DONE');</script>";
-    
-//     $NIC = $_POST["NIC"];
-//     $fname = $_POST["fname"];
-//     $lname = $_POST["lname"];
-//     $mobile = $_POST["mobile"];
-//     $email =$_POST["email"];
-//     //$farmerPic = $_POST["farmerPic"];
-//     $password1 = $_POST["ps1"];
-//     $password2 = $_POST["ps2"];
-    
-//     // $agriDiv = $_POST["agriDiv"];
 
-// //     UPDATE table_name
-// // SET column1=value, column2=value2,...
-// // WHERE some_column=some_value 
+                                  <!-- <div><input type="submit" value="more details" class="btnAddAction pull-right pagado" data-toggle="modal" data-target="#myModal"/> -->
 
 
-//   if ($password1==$password2) {   
+                                </div>
+                                </form>
+                              </div>
+
+                        <?php
+                            }
+                     ?>
+                      <div class="card">
+                      <input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
+                      <div class="centered">Add new Crop</div>
+                      </div>
+                     <?php     
+
+
+                    }
+            }
    
-//    $sql = "UPDATE farmer SET NIC='$NIC',name='$fname',lname='$lname',mobile='$mobile',email='$email',password='$password1' WHERE farmerID LIKE '$farmerID'";
+    if ($result->num_rows == 0){?>
+      <div class="card">
+      <input type="image" src="img/tile1.jpg" onClick="document.location.href='2.php'"  class = "tile" alt="Avatar" style="width:100%"  />
+      <div class="centered">Start Cultivating !</div>
+      </div>
+    <?php } ?>
 
-//    if ($conn->query($sql) === TRUE) {
-//           echo "<script type='text/javascript'>alert('SQL DONE');</script>";
-    
-//    }
-//   else {
-//     echo "<script type='text/javascript'>alert('SQL FAIL');</script>";
-//   }
+    <?php
+        if(isset($_POST['done'])){
+        echo $_POST['key'];
+        echo "<script type='text/javascript'>
+			$(document).ready(function(){
+			$('#myModal').modal('modal');
+			});
+			</script>";
+      }
+    ?>
 
 
-//    }
 
-//    else{
-//           echo "<script type='text/javascript'>alert('Password doesn't match');</script>";
-//   }
-// }
-?>
 
-<!-- ====================================================================================================================================================================       -->
+
+
+</div>
+      <!-- DATA MODAL -->
+      <div class="container">
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
+              </div>
+              <div class="modal-body">
+                <img src="<?php echo "https://www.w3schools.com/w3css/img_lights.jpg" ?>" class="media-photo" style="width:100%; "> 
+                <p><strong><?php echo "sd" ?></strong></p>
+                <p><?php echo "sds" ?></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+
+
+
+
+
+
+
+
+
+<style>
+	.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:white;
+    font-family: sans-serif;
+    font-size: 30px;
+    text-align: center;
+}
+</style>
+
+
 
 
 
